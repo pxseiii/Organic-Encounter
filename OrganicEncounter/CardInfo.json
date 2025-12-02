@@ -1,0 +1,22 @@
+[
+  {
+    "id": "001",
+    "type": "weather",
+    "situation": "There is an incoming typhoon.",
+    "icon": "reporter.png",
+    "leftChoice": "Ignore. It's just a typhoon",
+    "leftEffect": {"health": -40, "rep": 0, "money": -20},
+    "rightChoice": "Prepare for it",
+    "rightEffect": {"health": 40, "rep": 0, "money": -20}
+  },
+  {
+    "id": "002",
+    "type": "money",
+    "situation": "Can I borrow money?",
+    "icon": "marites.png",
+    "leftChoice": "No lol sorry",
+    "leftEffect": {"health": 0, "rep": -30, "money": 0},
+    "rightChoice": "Sure!",
+    "rightEffect": {"health": 40, "rep": 30, "money": -30}
+  }
+]
