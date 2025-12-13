@@ -49,7 +49,7 @@ public class CardData {
         INTRO, RANDOM, PLOT
     }
 
-    // overload createCard method for intro branching
+    // solely for branching in intro
     private static Card createBranchingIntroCard(
         String situation, 
         String title, 
