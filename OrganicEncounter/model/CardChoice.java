@@ -2,7 +2,8 @@ package model;
 
 /* 
     Purpose: 
-    * gets text / consequences of a decision
+    * encapsulates a choice on a card
+    * contains the text & consequences (stat change) of a choice
     
     Concepts used:
     * Encapsulation
@@ -11,35 +12,31 @@ package model;
 
 public class CardChoice {
     private String text;
-    private int HealthEffect;
-    private int RepEffect;
-    private int MoneyEffect;
+    private StatsChange effect;
+    private Card nextCard;              // for optional branching
 
-    public CardChoice(String text, int HealthEffect, int RepEffect, int MoneyEffect) {
+    // overloading constructors
+    // for intro cards with branching
+    public CardChoice(String text, StatsChange effect) {
+        this(text, effect, null);
+    }
+
+    // for normal cards; ones w/o branching
+    public CardChoice(String text, StatsChange effect, Card nextCard) {
         this.text = text;
-        this.HealthEffect = HealthEffect;
-        this.RepEffect = RepEffect;
-        this.MoneyEffect = MoneyEffect;
+        this.effect = effect;
+        this.nextCard = nextCard;
     }
 
-    public String getText() {
-        return text;
-    }
+    public String getText() { return text; }
+    public boolean hasNextCard(){ return nextCard != null; }
+    public Card getNextCard(){ return nextCard; }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getHealthEffect() {
-        return HealthEffect;
-    }
-
-    public int getRepEffect() {
-        return RepEffect;
-    }
-
-    public int getMoneyEffect() { 
-        return MoneyEffect; 
+    // helper method to apply effect to Stats
+    public void applyEffect(Stats stats){
+        if (effect != null){
+            effect.applyTo(stats);
+        }
     }
 }
 

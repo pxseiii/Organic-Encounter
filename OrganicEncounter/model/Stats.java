@@ -3,6 +3,7 @@ package model;
 /* 
     Purpose: 
     * gets and modifies stats of player's factors
+    * stores current values (what the player has now)
     
     Concepts used:
     * Encapsulation 
@@ -10,39 +11,24 @@ package model;
 */
 
 public class Stats {
-    private int health;
-    private int rep;
-    private int money;
+    private double health;
+    private double rep;
+    private double money;
 
-    public Stats(int health, int rep, int money) {
+    public Stats(double health, double rep, double money) {
         this.health = health;
         this.rep = rep;
         this.money = money;
     }
 
-    // Getters and setters
-    public int getHealth() { 
-        return health; 
-    }
+    // getters 
+    public double getHealth() { return health; }
+    public double getRep() { return rep; }
+    public double getMoney() { return money; }
 
-    public void modifyHealth(int amount) { 
-        health += amount; 
-    }
-
-    public int getRep() { 
-        return rep; 
-    }
-
-    public void modifyRep(int amount) { 
-        rep += amount; 
-    }
-
-    public int getMoney() { 
-        return money; 
-    }
-
-    public void modifyMoney(int amount) { 
-        money += amount; 
-    }
+    // modifies the stats to store
+    public void modifyHealth(double amount) { health += amount; }
+    public void modifyRep(double amount) { rep += amount; }
+    public void modifyMoney(double amount) { money += amount; }
 
 }

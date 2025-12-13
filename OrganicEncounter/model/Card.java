@@ -7,8 +7,11 @@ package model;
     Concepts used:
     * Abstraction - represents gameplay concept as a simple Java object
     * Encapsulation
+    * Polymorphism
+    * Inheritance
 */
 
+// parent class for Cards
 public abstract class Card {
     private String situation;
     private String title;
@@ -26,67 +29,35 @@ public abstract class Card {
 
     // ----------- GETTERS --------------
 
-    public String getSituation() {
-        return situation;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public CardChoice getLeftChoice() {
-        return leftChoice;
-    }
-
-    public CardChoice getRightChoice() {
-        return rightChoice;
-    }
-
-    // applies consequences to player's stats
-    public abstract void applyEffect(Stats stat, CardChoice choice);
+    public String getSituation() { return situation; }
+    public String getTitle() { return title; }
+    public String getIcon() { return icon; }
+    public CardChoice getLeftChoice() { return leftChoice; }
+    public CardChoice getRightChoice() { return rightChoice; }
 }
 
-class GenCard extends Card {
-    public GenCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
+
+// subclasses: IntroCard, RandomCard, PlotCard, EndingCard
+class RandomCard extends Card {
+    public RandomCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
         super(situation, title, icon, left, right);
     }
+}
 
-    @Override
-    public void applyEffect(Stats stat, CardChoice choice) {
-        stat.modifyHealth(choice.getHealthEffect());
-        stat.modifyRep(choice.getRepEffect());
-        stat.modifyMoney(choice.getMoneyEffect());
+class PlotCard extends Card {
+    public PlotCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
+        super(situation, title, icon, left, right);
     }
 }
 
-/*
-????
-class RepCard extends Card {
-    public RepCard(String situation, String icon, CardChoice left, CardChoice right) {
-        super(situation, icon, left, right);
-    }
-
-    @Override
-    public void applyEffect(Player player, CardChoice choice) {
-        player.modifyCrop(choice.getHealthEffect());
-        player.modifyRep(choice.getRepEffect());
-        player.modifyMoney(choice.getMoneyEffect());
+class IntroCard extends Card {
+    public IntroCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
+        super(situation, title, icon, left, right);
     }
 }
 
-class MoneyCard extends Card {
-    public MoneyCard(String situation, String icon, CardChoice left, CardChoice right) {
-        super(situation, icon, left, right);
+class EndingCard extends Card {
+    public EndingCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
+        super(situation, null, icon, null, null);
     }
-
-    @Override
-    public void applyEffect(Player player, CardChoice choice) {
-        player.modifyCrop(choice.getHealthEffect());
-        player.modifyRep(choice.getRepEffect());
-        player.modifyMoney(choice.getMoneyEffect());
 }
-*/

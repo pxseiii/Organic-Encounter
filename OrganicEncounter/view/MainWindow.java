@@ -2,6 +2,9 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import model.*;
 
 /* 
@@ -17,7 +20,7 @@ public class MainWindow  {
     private JPanel factorPanel;
     private CardPanel cardPanel;            // swipable card panel
 
-    private JLabel situationLabel;
+    private JTextPane situationLabel;
     private JLabel characLabel;
     private JLabel dayLabel;
 
@@ -25,8 +28,6 @@ public class MainWindow  {
     private JLabel repIconLabel;
     private JLabel moneyIconLabel;
 
-    //private Game game;
-    private CardManager cardManager;
     private int day = 1;                    
 
     // constructor
@@ -39,8 +40,6 @@ public class MainWindow  {
 
         mainPanel = new JPanel(new BorderLayout());
         frame.setContentPane(mainPanel);
-
-        cardManager = new CardManager();
 
         // ---------- NORTH BORDER LAYOUT ---------- 
         // effect indicator, factor icons, situation text
@@ -77,10 +76,12 @@ public class MainWindow  {
 
     
         // --------- situation panel
-        situationLabel = new JLabel("", SwingConstants.CENTER);
-        situationLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        situationLabel = new JTextPane();
+        situationLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
         situationLabel.setForeground(Color.BLACK);
-        situationLabel.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        situationLabel.setOpaque(false);
+        situationLabel.setEditable(false);
+        situationLabel.setFocusable(false);
 
         JPanel situationPanel = new JPanel(new BorderLayout());
         situationPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
@@ -118,7 +119,6 @@ public class MainWindow  {
         characLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JPanel characPanel = new JPanel(new BorderLayout());
-        //characPanel.setBackground(new Color(230, 230, 230));
         characPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         characPanel.add(characLabel, BorderLayout.CENTER);
 
@@ -139,28 +139,39 @@ public class MainWindow  {
         southPanel.add(dayPanel);
 
         mainPanel.add(southPanel, BorderLayout.SOUTH);
-        
-        //game =  new Game(cardManager, this);
-        //cardPanel.setSwipeListener(game);
-        //game.showNextCard();
-        update();
 
         frame.setVisible(true);
     }
 
-    // called by Presenter 
-    public void update() {
-        //delete once Game is done
-        Card card = cardManager.getNextCard();
+    // update ui
+    public void update(Card card, Stats stats) {
         if (card == null) {
             situationLabel.setText("No more cards.");
             return;
         }
 
-        //updates situation, character, and counter here since it's not part of the card
-        situationLabel.setText(card.getSituation());
+        // updates situation, character, and counter here since it's not part of the card
+        situationLabel.setText(card.getSituation()); // <html><div style='width:360px; text-align:center;'>" + card.getSituation() + "</div></html>"
+
+        // sets the situation text in center
+        StyledDocument doc = situationLabel.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
         characLabel.setText(card.getTitle());
-        day++;
+        dayLabel.setText("DAY " + day++);
         cardPanel.displayCard(card);
+
+        // update factor icons ?
+    }
+
+    public void showEnding(Card endingCard){
+        situationLabel.setText(endingCard.getSituation());
+        cardPanel.displayCard(endingCard);
+    }
+
+    public CardPanel getCardPanel(){
+        return cardPanel;
     }
 }

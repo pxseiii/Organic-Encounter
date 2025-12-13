@@ -36,7 +36,7 @@ public class CardPanel extends JPanel{
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Color.GRAY, 5, true),
-            BorderFactory.createEmptyBorder(20,20,20,20)
+            BorderFactory.createEmptyBorder(20,20,20,20)    // adds invisible padding 
         ));
         add(card, BorderLayout.CENTER);
 
@@ -70,12 +70,26 @@ public class CardPanel extends JPanel{
     }
 
     public void displayCard(Card card) {
+        if (card == null) return;
+
         ImageIcon icon = new ImageIcon("images/" + card.getIcon());
         Image scaled = icon.getImage().getScaledInstance(500, 450, Image.SCALE_SMOOTH);
         iconLabel.setIcon(new ImageIcon(scaled));
         
-        leftLabel.setText("<html>" + card.getLeftChoice().getText() + "</html>");
-        rightLabel.setText("<html>" + card.getRightChoice().getText() + "</html>");
+        if (card.getLeftChoice() != null && card.getRightChoice() != null){           // since endingCard also uses this but doesnt have left/right choice
+            leftLabel.setText("<html>" //<div style='width:200px;'>
+                + card.getLeftChoice().getText() + "</div></html>");
+            rightLabel.setText("<html>" //<div style='width:200px; text-align: right;'>
+                + card.getRightChoice().getText() + "</div></html>");
+            leftLabel.setVisible(true);
+            rightLabel.setVisible(true);
+        } else {
+            // ending card; no choices
+            leftLabel.setText("");
+            rightLabel.setText("");
+            leftLabel.setVisible(false);
+            rightLabel.setVisible(false);
+        }
     }
 
     private void setupMotion(){
@@ -99,9 +113,7 @@ public class CardPanel extends JPanel{
                     } else if (offset > swipeThreshold){    // if card moved 80 px right 
                         listener.onSwipeRight();
                     }
-                }
-                // return card to center
-                card.setLocation(origX, card.getY());  
+                } 
             }
         });
 
