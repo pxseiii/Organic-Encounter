@@ -72,7 +72,7 @@ public class CardPanel extends JPanel{
     public void displayCard(Card card) {
         if (card == null) return;
 
-        ImageIcon icon = new ImageIcon("images/" + card.getIcon());
+        ImageIcon icon = new ImageIcon("OrganicEncounter/images/" + card.getIcon());
         Image scaled = icon.getImage().getScaledInstance(500, 450, Image.SCALE_SMOOTH);
         iconLabel.setIcon(new ImageIcon(scaled));
         
