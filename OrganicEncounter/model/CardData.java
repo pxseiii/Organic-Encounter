@@ -201,20 +201,74 @@ public class CardData {
         List<Card> randomCards = new ArrayList<>();
 
         randomCards.add(createCard(
-            "There is an incoming typhoon.",
-            "Reporter",
-            "reporter.jpg",
-            "Ignore. It's just a typhoon", new StatsChange(-0.1, 0, -0.2),
-            "Prepare for it", new StatsChange(0.2, 0, 0.2),
+            "According to PAGASA, the Typhoon Mira has entered the Philippine Area of Responsibility.",
+            "Ahtisa | Reporter",
+            "reporter_v1.png",
+            "Prepare for it", new StatsChange(0.1, 0, -0.2),
+            "Let it be", new StatsChange(-0.2, 0, 0),
             CardType.RANDOM
         ));
 
         randomCards.add(createCard(
-            "Can I borrow money?",
-            "Marites",
-            "marites.jpg",
-            "Sure!", new StatsChange(0.4, 0.3, -0.3),
-            "No lol sorry", new StatsChange(0, -0.3, 0),
+            "The flood is currently at the warning level and is expected to continue rising for the next 24 hours.",
+            "Ahtisa | Reporter",
+            "reporter_v1.png",
+            "Evacuate workers and save equipment", new StatsChange(0.1, 0.1, -0.1),
+            "Ignore", new StatsChange(-0.2, -0.1, 0),
+            CardType.RANDOM
+        ));
+
+        randomCards.add(createCard(
+            "I heard from the people in town that there is a pest outbreak.",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "Buy emergency pesticides", new StatsChange(0.1, 0, -0.1),
+            "Take the risk", new StatsChange(-0.2, 0, 0),
+            CardType.RANDOM
+        ));
+
+        randomCards.add(createCard(
+            "Asensado ka na talaga ah… Baka may 500 ka diyan? Hiram sana ako.",
+            "Marites | Villager",
+            "marites_v3.png",
+            "Lend her money", new StatsChange(0, 0.1, -0.1),
+            "Refuse to lend her money", new StatsChange(0, -0.2, 0),
+            CardType.RANDOM
+        ));
+
+        randomCards.add(createCard(
+            "I found a fertilizer online that enhances crop production.",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "Purchase", new StatsChange(0.1, 0, -0.1),
+            "Ignore", new StatsChange(0, 0, 0),
+            CardType.RANDOM
+        ));
+
+        randomCards.add(createCard(
+            "There will be a townhall meeting tomorrow for the town's development.",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "Attend", new StatsChange(0, 0.2, 0),
+            "I dislike socializing", new StatsChange(0, -0.2, 0),
+            CardType.RANDOM
+        ));
+
+        randomCards.add(createCard(
+            "Mars may 1 kilong mangga ako dito. Bibili ka?",
+            "Marites | Villager",
+            "marites_v3.png",
+            "Buy", new StatsChange(0, 0.1, -0.1),
+            "Dont buy", new StatsChange(0, -0.1, 0),
+            CardType.RANDOM
+        ));
+
+        randomCards.add(createCard(
+            "Mahina na yung kalabaw natin.",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "Buy kalabaw", new StatsChange(0.1, 0, -0.1),
+            "Invest in new technology", new StatsChange(0.2, 0, -0.2),
             CardType.RANDOM
         ));
 
@@ -222,17 +276,18 @@ public class CardData {
     }
 
     public static List<Card> getPlotDeck(){
-        List<Card> randomCards = new ArrayList<>();
+        List<Card> plotCards = new ArrayList<>();
 
-        randomCards.add(createCard(
-            "There is an incoming typhoon.",
-            "Reporter",
-            "reporter.jpg",
-            "Ignore. It's just a typhoon", new StatsChange(-0.4, 0, -0.2),
-            "Prepare for it", new StatsChange(0.4, 0, -0.2),
-            CardType.RANDOM
+        plotCards.add(createCard(
+            "We have a park renovation coming up. Would you mind donating to the town? Any amount will do.",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "Donate generously.", new StatsChange(0, 0.2, -0.2),
+            "Ignore donation", new StatsChange(0, -0.2, 0),
+            CardType.PLOT
         ));
-        return randomCards;
+
+        return plotCards;
     }
 
     public static List<Card> getEndingDeck(){
