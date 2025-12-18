@@ -10,19 +10,19 @@ package model;
 public class StatsChange {
     public static final StatsChange NONE = new StatsChange(0, 0, 0);
 
-    private final double healthChange;
-    private final double repChange;
-    private final double moneyChange;
+    private final int healthChange;
+    private final int repChange;
+    private final int moneyChange;
 
-    public StatsChange(double healthChange, double repChange, double moneyChange) {
+    public StatsChange(int healthChange, int repChange, int moneyChange) {
         this.healthChange = healthChange;
         this.repChange = repChange;
         this.moneyChange = moneyChange;
     }
 
-    public double getHealthChange() { return healthChange; }
-    public double getRepChange() { return repChange; }
-    public double getMoneyChange() { return moneyChange; }
+    public int getHealthChange() { return healthChange; }
+    public int getRepChange() { return repChange; }
+    public int getMoneyChange() { return moneyChange; }
 
     // apply effect to stats
     public void applyTo(Stats stats) {
