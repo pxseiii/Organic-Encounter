@@ -49,6 +49,18 @@ public class CardData {
         INTRO, RANDOM, PLOT
     }
 
+    private static Card createBranchingPlotCard(
+        String situation, 
+        String title, 
+        String icon, 
+        String leftText, StatsChange leftStatsChange, Card leftNextCard, 
+        String rightText, StatsChange rightStatsChange, Card rightNextCard){
+        CardChoice left = new CardChoice(leftText, leftStatsChange, leftNextCard);
+        CardChoice right = new CardChoice(rightText, rightStatsChange, rightNextCard);
+
+        return new PlotCard(situation, title, icon, left, right);
+    }
+
     // solely for branching in intro
     private static Card createBranchingIntroCard(
         String situation, 
@@ -194,6 +206,33 @@ public class CardData {
         );
         introCards.add(intro2);
 
+        introCards.add(createCard(
+            "Are you the new farm owner? Hi, I’m Mayor Edna. It’s a pleasure to welcome you here!",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "Nice to meet you.", null,
+            "Hello.", null,
+            CardType.INTRO
+        ));
+
+        introCards.add(createCard(
+            "Condolences about your Lola Emelda. She was an integral part of our community.",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "Thank you.", null,
+            "She was, wasn’t she?", null,
+            CardType.INTRO
+        ));
+
+        introCards.add(createCard(
+            "I wanted to ask you something. We have a park renovation coming up. Would you mind donating to the town? Any amount will do.",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "Donate generously.", new StatsChange(0, 20, -20),
+            "Ignore donation.", new StatsChange(0, -20, 10),
+            CardType.INTRO
+        ));
+
         return introCards;
     }
 
@@ -278,12 +317,48 @@ public class CardData {
     public static List<Card> getPlotDeck(){
         List<Card> plotCards = new ArrayList<>();
 
+
+        Card plot1_choice1 = createBranchingPlotCard(
+            "Lola Emelda is a good friend of my lola. I’m Anton. I didn’t manage to send my condolences last time, so I thought I’d come by today.",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "Thank you, I have some questions about her.", null, null,
+            "Do I know you? No solicitors, I’m busy right now.", null, null
+        );
+
+        Card plot1_choice2 = createBranchingPlotCard(
+            "Don't worry, I am not a scammer! I know your lola, and I just want to send my condolences to you and your family. I'll drop by anytime again soon.",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "Ignore.", null, null,
+            "See you.", null, null
+        );
+
+        Card plot1 = createBranchingPlotCard(
+            "Excuse me, this is Lola Emelda’s house, right?",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "Yes, may I know who you are?", new StatsChange(0, 10, 0), plot1_choice1,
+            "Do I know you? No solicitors, I’m busy right now.", new StatsChange(0, -10, 0), plot1_choice2
+        );
+
+        plotCards.add(plot1);
+
         plotCards.add(createCard(
-            "We have a park renovation coming up. Would you mind donating to the town? Any amount will do.",
+            "The fiesta is fast approaching. We need sponsors for its preparation.",
             "Mayor Edna | Mayor",
             "mayor_v1.png",
             "Donate generously.", new StatsChange(0, 20, -20),
-            "Ignore donation", new StatsChange(0, -20, 0),
+            "Don't donate.", new StatsChange(0, -20, 10),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "Hey, just dropping by again. How are you settling in?",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "It’s going really well.", null,
+            "Honestly, it’s been tough.", null,
             CardType.PLOT
         ));
 

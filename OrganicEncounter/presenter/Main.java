@@ -12,15 +12,15 @@ import view.MainWindow;
 
 /*
     Purpose: solely to start the game / launch the system
-    note: invokeLater launches the GUI on the Event Dispatch Thread.
+    note: invokeLater launches the GUI on the Event Dispatch Thread 
+    (the only thread that should create or update Swing UI components).
  */
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainWindow ui = new MainWindow();           // create UI
-            Game game = new Game(ui);                   // create Presenter and pass UI
-            ui.getCardPanel().setSwipeListener(game);   // connect CardPanel swipes to the 
+            MainWindow ui = new MainWindow();           // builds the Jframe and UI
+            new Game(ui);                   // create Presenter and pass UI; allows it to update the UI, respond to user actions
         });
     }
 }

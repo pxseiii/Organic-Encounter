@@ -1,8 +1,7 @@
 package presenter;
 
 import model.*;
-import view.MainWindow;
-import view.SwipeListener;
+import view.*;
 
 /* 
     Purpose: 
@@ -17,23 +16,55 @@ public class Game implements SwipeListener {
     private MainWindow ui;
     private Stats playerStats;
     private Card currentCard;
+    private Card endingCard;
+
+    private boolean isEnding = false;
 
     public Game(MainWindow ui){
         this.ui = ui;
-        this.cardManager = new CardManager();
-        this.playerStats = new Stats(50, 50, 50);      // initial value
-        this.ui.getCardPanel().setSwipeListener(this);
+        ui.getTitlePanel().setStartListener(e -> startNewGame());
+        ui.showTitleScreen();
+    }
+
+    private void startNewGame(){
+        cardManager = new CardManager();
+        playerStats = new Stats(50, 50, 50);
+        
+        ui.getGamePanel().getCardPanel().setSwipeListener(this);
+        isEnding = false;
+        
+        ui.showGameScreen();
         showNextCard();
     }
 
     @Override 
-    public void onSwipeRight() {  
-        handleChoice(true); 
+    public void onSwipeRight() {
+        if (isEnding && endingCard != null){
+            handleLastSwipe();
+        }  else {
+            handleChoice(true); 
+        }
     }
 
     @Override 
     public void onSwipeLeft()  {  
-        handleChoice(false);
+        if (isEnding && endingCard != null){
+            handleLastSwipe();
+        }  else {
+            handleChoice(false); 
+        }
+    }
+
+    private void handleLastSwipe(){      // for swiping ending card
+        ui.showEndingScreen(); 
+        
+        isEnding = false;
+        endingCard = null;
+
+        //after 2 seconds, return to title
+        javax.swing.Timer t = new javax.swing.Timer(2000, e -> ui.showTitleScreen());
+        t.setRepeats(false);
+        t.start();
     }
 
     private void handleChoice(boolean isRight){
@@ -47,16 +78,14 @@ public class Game implements SwipeListener {
         }           
 
         // check if there's branching
-        if (choice.hasNextCard()){
-            currentCard = choice.getNextCard(); // force next card from this choice
-        } else {
-            currentCard = cardManager.getNextCard(); // otherwise, proceed with normal deck flow
-        }
+        currentCard = choice.hasNextCard() ? choice.getNextCard() : cardManager.getNextCard();
 
         // check factor-based endings first
         Card factorEnding = cardManager.getFactorEnding(playerStats);
         if (factorEnding != null){
-            ui.showEnding(factorEnding);
+            endingCard = factorEnding;                  // stores ending card
+            isEnding = true;
+            ui.getGamePanel().showEndingCard(factorEnding);
             return;                                     // stop game flow
         }
 
@@ -64,25 +93,30 @@ public class Game implements SwipeListener {
         if (currentCard == null){
             Card finalEnding = cardManager.getEnding(playerStats);
             if (finalEnding != null){
-                ui.showEnding(finalEnding);
+                endingCard = finalEnding;                  // stores ending card
+                isEnding = true;
+                ui.getGamePanel().showEndingCard(finalEnding);
                 return;
             }
         }
 
         // update UI
         if (currentCard != null){
-            ui.update(currentCard, playerStats);
+            ui.getGamePanel().update(currentCard, playerStats); // sends next card to MainWindow
         }
     }
+
     private void showNextCard(){
         currentCard = cardManager.getNextCard();
         if (currentCard != null){
-            ui.update(currentCard, playerStats); // sends first card to MainWindow
+            ui.getGamePanel().update(currentCard, playerStats); // sends current card to MainWindow
         } else {
             // if no more cards, show final ending
             Card finalEnding = cardManager.getEnding(playerStats);
             if (finalEnding != null){
-                ui.showEnding(finalEnding);
+                endingCard = finalEnding;                  // stores ending card
+                isEnding = true;
+                ui.getGamePanel().showEndingCard(finalEnding);
             }
         }
     }
