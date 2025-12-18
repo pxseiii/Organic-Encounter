@@ -65,9 +65,9 @@ public class CardManager {
     public Card getEnding(Stats stats){
         double average = (stats.getHealth() + stats.getRep() + stats.getMoney() / 3);
 
-        if (average > 0.5){
+        if (average > 50.0){
             return CardData.getEndingDeck().get(6);
-        } else if (average < 0.5) {
+        } else if (average < 50.0) {
             return CardData.getEndingDeck().get(7);
         }
         return null;
