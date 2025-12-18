@@ -21,7 +21,7 @@ public class Game implements SwipeListener {
     public Game(MainWindow ui){
         this.ui = ui;
         this.cardManager = new CardManager();
-        this.playerStats = new Stats(0.5, 0.5, 0.5);      // initial value
+        this.playerStats = new Stats(50, 50, 50);      // initial value
         this.ui.getCardPanel().setSwipeListener(this);
         showNextCard();
     }

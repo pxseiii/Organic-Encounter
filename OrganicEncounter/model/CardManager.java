@@ -17,7 +17,7 @@ public class CardManager {
     private int introIndex = 0;
     private int plotIndex = 0;
     private int MIN = 0;
-    private int MAX = 1;
+    private int MAX = 100;
 
     public CardManager() {
         introCards = CardData.getIntroDeck();
@@ -65,7 +65,7 @@ public class CardManager {
     public Card getEnding(Stats stats){
         double average = (stats.getHealth() + stats.getRep() + stats.getMoney() / 3);
 
-        if (average > 50.0){
+        if (average >= 50.0){
             return CardData.getEndingDeck().get(6);
         } else if (average < 50.0) {
             return CardData.getEndingDeck().get(7);
