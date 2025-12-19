@@ -259,7 +259,7 @@ public class GamePanel {
         bar.setBackground(new Color(0xafb5af));
 
         // mac L
-        bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
+        // bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
 
         return bar;
     }
