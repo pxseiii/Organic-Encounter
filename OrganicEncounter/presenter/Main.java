@@ -7,8 +7,16 @@
 
 package presenter;
 
+import annotation.ClassInfo;
 import javax.swing.SwingUtilities;
 import view.MainWindow;
+
+@ClassInfo(
+    mainAuthor = "",
+    className = "Main",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 
 /*
     Purpose: solely to start the game / launch the system
