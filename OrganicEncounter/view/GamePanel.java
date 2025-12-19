@@ -138,7 +138,7 @@ public class GamePanel {
         situationWrapper.add(situationLabel, gbc);
         northPanel.add(situationWrapper);
 
-                mainPanel.add(northPanel);
+        mainPanel.add(northPanel);
 
 
         /* ===================== CENTER ===================== */
@@ -222,8 +222,8 @@ public class GamePanel {
         bar.setForeground(Color.WHITE);
         bar.setBackground(new Color(0xafb5af));
 
-        // mac
-        bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
+        // mac L
+        // bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
 
         return bar;
     }
