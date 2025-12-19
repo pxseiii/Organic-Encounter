@@ -1,9 +1,17 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import model.*;
+
+@ClassInfo(
+    mainAuthor = "",
+    className = "CardPanel",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 
 /* 
     Purpose: 
