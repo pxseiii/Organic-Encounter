@@ -164,15 +164,15 @@ public class CardData {
             "Your farm will face various threats daily, and you have to maintain everything in balance. May luck be ever in your favor.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
-            "Okay. Thanks.", null,      // game proper                 
-            "I’m ready.", null        // game proper
+            "Okay. Thanks.", null,        // game proper                 
+            "I’m ready.", null            // game proper
         );
 
         Card tutorial3 = createBranchingIntroCard(
             "Survive the daily encounter with nature. Defeat the pests, weather, and all that threatens the farm’s condition. I wish you luck.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
-            "I understand", null,   // game proper                 
+            "I understand", null,         // game proper                 
             "I don’t understand", tutorial4
         );
 
@@ -207,7 +207,7 @@ public class CardData {
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
             "Let’s just talk some other day.", dream,    // dream
-            "You don’t have to worry about me.", null   // game proper
+            "You don’t have to worry about me.", null    // game proper
         );
 
         Card intro2 = createBranchingIntroCard(
@@ -616,58 +616,42 @@ public class CardData {
         */
         endingCards.add(new EndingCard(
             "Your farm drew too many greedy eyes– relatives, developers, and even political figures all after your land.", 
-            null, 
-            "lp_max.png",
-            null, null
+            "lp_max.png"
         ));
 
         endingCards.add(new EndingCard(
             "Your grandmother’s farmland dies– and with it, the last living memory of her.", 
-            null, 
-            "lp_min.png",
-            null, null
+            "lp_min.png"
         ));
 
         endingCards.add(new EndingCard(
             "People expected too much from you. The pressure to maintain your reputation wore you down, so you left without a trace, trying to take a breather.", 
-            null, 
-            "rep_max.png",
-            null, null
+            "rep_max.png"
         ));
 
         endingCards.add(new EndingCard(
             "Workers abandoned you for your unfair treatment. No one wants to engage with you. Your name’s a dirt in the village.", 
-            null, 
-            "rep_min.png",
-            null, null
+            "rep_min.png"
         ));
 
         endingCards.add(new EndingCard(
             "Workers staged a protest because of your profit-over-people mindset. Mayor Edna and a DA rep confronted you about your neglect of responsibility to the environment.", 
-            null, 
-            "finance_max.png",
-            null, null
+            "finance_max.png"
         ));
 
         endingCards.add(new EndingCard(
             "Debt crushed you. Your aunt paid it off… and took the farm in return.", 
-            null, 
-            "finance_min.png",
-            null, null
+            "finance_min.png"
         ));
 
         endingCards.add(new EndingCard(
             "You managed to maintain the farm’s condition despite all the organic encounters. The court decided to give you the ownership of the land.", 
-            null, 
-            "good_ending.png",
-            null, null
+            "good_ending.png"
         ));
 
         endingCards.add(new EndingCard(
             "Your aunt saw how you handled the farm and used it against you in the court case she filed. You lost the case, just like how you lost the last piece of memory of your grandmother.", 
-            null, 
-            "bad_ending.png",
-            null, null
+            "bad_ending.png"
         ));
 
         return endingCards;
