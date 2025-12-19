@@ -72,15 +72,39 @@ public class CardPanel extends JPanel{
         setupMotion();
     }
 
-    public void displayCard(Card card) {
+    public void displayCard(Card card) {    
         if (card == null) return;
 
         // store
         currentCard = card;
 
-        ImageIcon icon = new ImageIcon("OrganicEncounter/images/" + card.getIcon());
-        Image scaled = icon.getImage().getScaledInstance(450, 400, Image.SCALE_SMOOTH);
-        iconLabel.setIcon(new ImageIcon(scaled));
+        // for icon check
+        String iconPath = card.getIcon();
+        
+        // to check if card has icon in the first place
+        if (iconPath == null || iconPath.trim().isEmpty()) {
+            iconLabel.setIcon(null);
+        } else {
+            try {
+                ImageIcon icon = new ImageIcon("images/" + iconPath);
+                
+                if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                    throw new RuntimeException("Image failed to load");
+                }
+                Image scaled = icon.getImage().getScaledInstance(450, 400, Image.SCALE_SMOOTH);
+                iconLabel.setIcon(new ImageIcon(scaled));
+                
+            } catch (Exception e) {
+                try {
+                    ImageIcon errorIcon = new ImageIcon("C:\\Users\\somet\\Desktop\\OrganicEncounter\\images\\error.png");
+                    Image scaled = errorIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                    iconLabel.setIcon(new ImageIcon(scaled));
+                } catch (Exception ex) {
+                    // clears icon if even error fails :(
+                    iconLabel.setIcon(null);
+                }
+            }
+        }
         
         if (card.getLeftChoice() != null && card.getRightChoice() != null){           // since endingCard also uses this but doesnt have left/right choice
             leftLabel.setText("<html>" + card.getLeftChoice().getText() + "</div></html>");

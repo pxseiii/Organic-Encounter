@@ -85,11 +85,11 @@ public class GamePanel {
         factorLayeredPane.add(repBar, Integer.valueOf(1));
         factorLayeredPane.add(moneyBar, Integer.valueOf(1));
 
-        healthIconLabel = createIcon("OrganicEncounter/images/lp.png", iconSize);
+        healthIconLabel = createIcon("images/lp.png", iconSize);
         healthIconLabel.setBounds(leftMargin, yOffset, iconSize, iconSize);
-        repIconLabel = createIcon("OrganicEncounter/images/rep.png", iconSize);
+        repIconLabel = createIcon("images/rep.png", iconSize);
         repIconLabel.setBounds(leftMargin + iconSize + spacing, yOffset, iconSize, iconSize);
-        moneyIconLabel = createIcon("OrganicEncounter/images/finance.png", iconSize);
+        moneyIconLabel = createIcon("images/finance.png", iconSize);
         moneyIconLabel.setBounds(leftMargin + 2 * iconSize + 2 * spacing, yOffset, iconSize, iconSize);
 
         factorLayeredPane.add(healthIconLabel, Integer.valueOf(2));
@@ -204,11 +204,22 @@ public class GamePanel {
     }
 
     private JLabel createIcon(String path, int size) {
-        ImageIcon icon = new ImageIcon(path);
-        Image scaled = icon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
-        JLabel label = new JLabel(new ImageIcon(scaled));
-        label.setOpaque(false);
-        return label;
+        try {
+            ImageIcon icon = new ImageIcon(path);
+            
+            // Check if image was actually loaded
+            if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+                throw new RuntimeException("Image failed to load");
+            }
+            
+            Image scaled = icon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
+            return new JLabel(new ImageIcon(scaled));
+        } catch (Exception e) {
+            // Only use error.jpg - no text fallback
+            ImageIcon errorIcon = new ImageIcon("C:\\Users\\somet\\Desktop\\OrganicEncounter\\images\\error.png");
+            Image scaled = errorIcon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
+            return new JLabel(new ImageIcon(scaled));
+        }
     }
 
     private JProgressBar createVerticalBar() {
