@@ -19,25 +19,6 @@ public class MainWindow  {
     private GamePanel gamePanel;
     private EndPanel endPanel;
 
-    // game fields
-    private JPanel effectPanel;
-    private JLabel health;
-    private JLabel rep;
-    private JLabel money;
-
-    private JPanel factorPanel;
-    private CardPanel cardPanel;            // swipable card panel
-
-    private JTextPane situationLabel;
-    private JLabel characLabel;
-    private JLabel dayLabel;
-
-    private JLabel healthIconLabel;
-    private JLabel repIconLabel;
-    private JLabel moneyIconLabel;
-
-    private int day = 1;                    
-
     // constructor
     public MainWindow(){                                        
         // ---------- MAIN WINDOW ----------

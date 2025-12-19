@@ -29,8 +29,10 @@ public class CardChoice {
     }
 
     public String getText() { return text; }
-    public boolean hasNextCard(){ return nextCard != null; }
     public Card getNextCard(){ return nextCard; }
+    public StatsChange getEffect(){ return effect; }
+
+    public boolean hasNextCard(){ return nextCard != null; }
 
     // helper method to apply effect to Stats
     public void applyEffect(Stats stats){

@@ -13,23 +13,26 @@ import model.*;
 
 public class CardPanel extends JPanel{
     private JPanel card;
-    private JLabel leftLabel;
-    private JLabel rightLabel;
-    private JLabel iconLabel;
+    private Card currentCard;
+
+    private JLabel leftLabel, rightLabel, iconLabel;
 
     private int origX;                          // since horizontal motion only
     private int swipeThreshold = 80;            // how far before considered a swipe
     private int pressX;
-    private SwipeListener listener;
 
+    private GamePanel gamePanel;
+
+    private SwipeListener listener;
     public void setSwipeListener(SwipeListener listener) {
         this.listener = listener;
     }
     
-    public CardPanel(){
-
+    public CardPanel(GamePanel gamePanel){
         setLayout(new BorderLayout());
         setBackground(new Color(230, 230, 230));
+
+        this.gamePanel = gamePanel;
 
         // ---------- CARD CONTAINER ----------
         card = new JPanel(new BorderLayout(10,10));
@@ -72,15 +75,16 @@ public class CardPanel extends JPanel{
     public void displayCard(Card card) {
         if (card == null) return;
 
-        ImageIcon icon = new ImageIcon("images/" + card.getIcon());
+        // store
+        currentCard = card;
+
+        ImageIcon icon = new ImageIcon("OrganicEncounter/images/" + card.getIcon());
         Image scaled = icon.getImage().getScaledInstance(500, 450, Image.SCALE_SMOOTH);
         iconLabel.setIcon(new ImageIcon(scaled));
         
         if (card.getLeftChoice() != null && card.getRightChoice() != null){           // since endingCard also uses this but doesnt have left/right choice
-            leftLabel.setText("<html>" //<div style='width:200px;'>
-                + card.getLeftChoice().getText() + "</div></html>");
-            rightLabel.setText("<html>" //<div style='width:200px; text-align: right;'>
-                + card.getRightChoice().getText() + "</div></html>");
+            leftLabel.setText("<html>" + card.getLeftChoice().getText() + "</div></html>");
+            rightLabel.setText("<html>" + card.getRightChoice().getText() + "</div></html>");
             leftLabel.setVisible(true);
             rightLabel.setVisible(true);
         } else {
@@ -91,6 +95,8 @@ public class CardPanel extends JPanel{
             rightLabel.setVisible(false);
         }
     }
+
+    
 
     private void setupMotion(){
         // --------- DRAG LISTENER ---------
@@ -113,18 +119,35 @@ public class CardPanel extends JPanel{
                     } else if (offset > swipeThreshold){    // if card moved 80 px right 
                         listener.onSwipeRight();
                     }
-                } 
+                }
+                // reset UI
+                card.setLocation(origX, card.getY());
+                gamePanel.drawCircleIndicator(null);
             }
         });
 
         // when user drags the card L/R
         card.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged(MouseEvent e) {
-                int newX = card.getX() + (e.getX() - pressX);
-                card.setLocation(newX, card.getY());
+            public void mouseDragged(MouseEvent e) {            // only notifies and does nothing visually when mouse button is down and moving; hence why its overriden
+                int newX = card.getX() + (e.getX() - pressX);   // updates everytime the current position of mouse is tracked
+                card.setLocation(newX, card.getY());            // swing repaints it at new loc
+
+                // show preview circles
+                int offset = newX - origX;
+
+                if (offset < -10) {                             // dragged left
+                    CardChoice choice = currentCard.getLeftChoice();
+                    gamePanel.drawCircleIndicator(
+                        choice != null ? choice.getEffect() : null);
+                } else if (offset > 10) {
+                    CardChoice choice = currentCard.getRightChoice();
+                    gamePanel.drawCircleIndicator(
+                        choice != null ? choice.getEffect() : null);
+                } else {                                        // back to center so no indicator
+                    gamePanel.drawCircleIndicator(null); 
+                }
             }
         });
     }
-
 }
