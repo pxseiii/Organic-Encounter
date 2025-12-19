@@ -16,7 +16,7 @@ public class EndPanel {
 
     public EndPanel(){
         mainPanel = new JPanel(null){
-            private Image background = new ImageIcon("images/credits.png").getImage();
+            private Image background = new ImageIcon("OrganicEncounter/images/credits.png").getImage();
         
             @Override
             protected void paintComponent(Graphics g){
