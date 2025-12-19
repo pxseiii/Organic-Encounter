@@ -1,7 +1,15 @@
 package presenter;
 
+import annotation.ClassInfo;
 import model.*;
 import view.*;
+
+@ClassInfo(
+    mainAuthor = "",
+    className = "Game",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 
 /* 
     Purpose: 
