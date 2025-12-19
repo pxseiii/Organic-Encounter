@@ -1,15 +1,20 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import javax.swing.*;
+
+@ClassInfo(
+    mainAuthor = "Miks",
+    className = "EndPanel",
+    pillarsUsed = {"Abstraction"},
+    solidUsed = {"SRP"}
+)
 
 public class EndPanel {
     private JPanel mainPanel;
 
     public EndPanel(){
-        //timer
-        
-
         mainPanel = new JPanel(null){
             private Image background = new ImageIcon("images/credits.png").getImage();
         
