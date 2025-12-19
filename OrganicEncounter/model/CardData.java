@@ -33,6 +33,7 @@ public class CardData {
         CardType type){
         CardChoice left = new CardChoice(leftText, leftStatsChange);
         CardChoice right = new CardChoice(rightText, rightStatsChange);
+
         try {
             switch(type){
                     case INTRO:
@@ -42,7 +43,7 @@ public class CardData {
                     case PLOT:
                         return new PlotCard(situation, title, icon, left, right);
                     default:
-                        throw new IllegalArgumentException("Unknown card type was loaded! Program will now restart.");
+                        throw new CardException("Unknown card type was loaded!");
         }} catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(null, e);
                 return null;
@@ -103,7 +104,7 @@ public class CardData {
             "You will do just fine. Gido will be there to guide you.",
             "Lola Emelda | Grandma",
             "grandma_v2.png",
-            "Who is he? (wala kang silbeng apo)", null,
+            "Who is he?", null,
             "I hope so…", null
         );
 
@@ -139,7 +140,7 @@ public class CardData {
             "Lola Emelda | Grandma",
             "grandma_v2.png",
             "I should talk to our caretaker once I see him.", null,
-            "I don’t want to talk to him. I think I’m going to be fine.", null
+            "I think I’m going to be fine.", null
         );
 
         Card dream = createBranchingIntroCard(
@@ -195,8 +196,8 @@ public class CardData {
 
         Card intro2_choice2 = createBranchingIntroCard(
             "I just need 5 minutes of your time.",
-            "Lola Emelda | Grandma",
-            "grandma_v2.png",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
             "Let’s just talk some other day.", dream,    // dream
             "You don’t have to worry about me.", null   // game proper
         );
@@ -247,8 +248,8 @@ public class CardData {
             "According to PAGASA, the Typhoon Mira has entered the Philippine Area of Responsibility.",
             "Ahtisa | Reporter",
             "reporter_v1.png",
-            "Prepare for it", new StatsChange(10, 0, -20),
-            "Let it be", new StatsChange(-20, 0, 0),
+            "Prepare for it.", new StatsChange(10, 0, -20),
+            "Let it be.", new StatsChange(-20, 0, 0),
             CardType.RANDOM
         ));
 
@@ -256,8 +257,8 @@ public class CardData {
             "The flood is currently at the warning level and is expected to continue rising for the next 24 hours.",
             "Ahtisa | Reporter",
             "reporter_v1.png",
-            "Evacuate workers and save equipment", new StatsChange(10, 10, -10),
-            "Ignore", new StatsChange(-20, -10, 0),
+            "Evacuate workers and save equipment.", new StatsChange(10, 10, -10),
+            "Ignore.", new StatsChange(-20, -10, 0),
             CardType.RANDOM
         ));
 
@@ -265,17 +266,17 @@ public class CardData {
             "I heard from the people in town that there is a pest outbreak.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
-            "Buy emergency pesticides", new StatsChange(10, 0, -10),
-            "Take the risk", new StatsChange(-20, 0, 0),
+            "Buy emergency pesticides.", new StatsChange(10, 0, -10),
+            "Take the risk.", new StatsChange(-20, 0, 0),
             CardType.RANDOM
         ));
 
         randomCards.add(createCard(
             "Asensado ka na talaga ah… Baka may 500 ka diyan? Hiram sana ako.",
-            "Marites | Villager",
+            "Marites | Neighbor",
             "marites_v3.png",
-            "Lend her money", new StatsChange(0, 10, -10),
-            "Refuse to lend her money", new StatsChange(0, -20, 0),
+            "Lend her money.", new StatsChange(0, 10, -10),
+            "Refuse to lend her money.", new StatsChange(0, -20, 0),
             CardType.RANDOM
         ));
 
@@ -283,8 +284,8 @@ public class CardData {
             "I found a fertilizer online that enhances crop production.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
-            "Purchase", new StatsChange(10, 0, -10),
-            "Ignore", new StatsChange(0, 0, 0),
+            "Purchase.", new StatsChange(10, 0, -10),
+            "Ignore.", new StatsChange(0, 0, 0),
             CardType.RANDOM
         ));
 
@@ -292,17 +293,17 @@ public class CardData {
             "There will be a townhall meeting tomorrow for the town's development.",
             "Mayor Edna | Mayor",
             "mayor_v1.png",
-            "Attend", new StatsChange(0, 20, 0),
-            "I dislike socializing", new StatsChange(0, -20, 0),
+            "Attend.", new StatsChange(0, 20, 0),
+            "I dislike socializing.", new StatsChange(0, -20, 0),
             CardType.RANDOM
         ));
 
         randomCards.add(createCard(
-            "Mars may 1 kilong mangga ako dito. Bibili ka?",
+            "Mars, may 1 kilong mangga ako dito. Bibili ka?",
             "Marites | Villager",
             "marites_v3.png",
-            "Buy", new StatsChange(0, 10, -10),
-            "Dont buy", new StatsChange(0, -10, 0),
+            "Buy.", new StatsChange(0, 10, -10),
+            "Don't buy.", new StatsChange(0, -10, 0),
             CardType.RANDOM
         ));
 
@@ -310,8 +311,8 @@ public class CardData {
             "Mahina na yung kalabaw natin.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
-            "Buy kalabaw", new StatsChange(10, 0, -10),
-            "Invest in new technology", new StatsChange(20, 0, -20),
+            "Buy kalabaw.", new StatsChange(10, 0, -10),
+            "Invest in new technology.", new StatsChange(20, 0, -20),
             CardType.RANDOM
         ));
 
@@ -321,13 +322,21 @@ public class CardData {
     public static List<Card> getPlotDeck(){
         List<Card> plotCards = new ArrayList<>();
 
+        plotCards.add(createCard(
+            "Mayroon kaming free training for sustainable farming. Gusto niyo bang magparticipate?",
+            "Sir Jonnel | DA Representative",
+            "DArep_v1.png",
+            "Attend.", new StatsChange(10, 0, 10),
+            "Ignore the invitation.", new StatsChange(0, -10, 0),
+            CardType.PLOT
+        ));
 
         Card plot1_choice1 = createBranchingPlotCard(
             "Lola Emelda is a good friend of my lola. I’m Anton. I didn’t manage to send my condolences last time, so I thought I’d come by today.",
             "Anton | Friend",
             "lawyer_v1.png",
             "Thank you, I have some questions about her.", null, null,
-            "Do I know you? No solicitors, I’m busy right now.", null, null
+            "Thank you, but I’m busy right now.", null, null
         );
 
         Card plot1_choice2 = createBranchingPlotCard(
@@ -343,10 +352,19 @@ public class CardData {
             "Anton | Friend",
             "lawyer_v1.png",
             "Yes, may I know who you are?", new StatsChange(0, 10, 0), plot1_choice1,
-            "Do I know you? No solicitors, I’m busy right now.", new StatsChange(0, -10, 0), plot1_choice2
+            "No solicitors, I’m busy right now.", new StatsChange(0, -10, 0), plot1_choice2
         );
 
         plotCards.add(plot1);
+
+        plotCards.add(createCard(
+            "Nakita ng isa sa mga trabahador na may nagkukubli sa sakahan. Gusto mo ba magsampa ng kaso?",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "File a lawsuit.", new StatsChange(0, -10, 20),
+            "Ignore.", new StatsChange(-10, 0, 0),
+            CardType.PLOT
+        ));
 
         plotCards.add(createCard(
             "The fiesta is fast approaching. We need sponsors for its preparation.",
@@ -357,14 +375,221 @@ public class CardData {
             CardType.PLOT
         ));
 
-        plotCards.add(createCard(
+        Card plot3_branch3 = createBranchingPlotCard(
+            "I’m just asking out of concern. Since I work in legal management, I can help if you want.",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "I can handle it myself, thanks.", new StatsChange(-10, 0, 0), null,
+            "I’ll keep that in mind, thanks.", new StatsChange(0, 10, 0), null
+        );
+
+        Card plot2_branch2 = createBranchingPlotCard(
+            "Really? So, have you gotten your routine check for your land title? Or, do you have your Lola’s will that proves the farm is yours?",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "Why?", null, plot3_branch3,
+            "I don’t think I need that.", new StatsChange(-10, 10, 0), null
+        );
+
+        Card plot2_branch1 = createBranchingPlotCard(
+            "I can see that… Anyway, ever since Lola died, who’s been in charge here?",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "I am.", new StatsChange(0, 20, 0), plot2_branch2,
+            "I’m trying my best to take care of things.", new StatsChange(0, 10, 0), plot2_branch2
+        );
+
+        Card plot2 = createBranchingPlotCard(
             "Hey, just dropping by again. How are you settling in?",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "It’s going really well.", null, plot2_branch1,
+            "Honestly, it’s been tough.", null, plot2_branch1
+        );
+
+        plotCards.add(plot2);
+
+        plotCards.add(createCard(
+            "There will be an increase in land tax effective tomorrow.",
             "Mayor Edna | Mayor",
             "mayor_v1.png",
-            "It’s going really well.", null,
-            "Honestly, it’s been tough.", null,
+            "Compromise.", new StatsChange(0, 10, -10),
+            "Don't donate.", new StatsChange(0, -20, 10),
             CardType.PLOT
         ));
+
+        plotCards.add(createCard(
+            "Hoy, ikaw! Di ka raw nagbabayad sa mga trabahador mo.",
+            "Marites | Neighbor",
+            "marites_v3.png",
+            "Deny.", new StatsChange(0, -10, 0),
+            "Adjust wages.", new StatsChange(0, 10, -10),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "There have been sightings of bird migration early this morning. Farmers are advised to prepare as these birds reportedly carry bird flu",
+            "Ahtisa | Reporter",
+            "reporter_v1.png",
+            "Prepare for it.", new StatsChange(10, 0, 10),
+            "Refuse to believe it.", new StatsChange(-20, 0, -20),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "I’m here to conduct our quarterly field inspection. Would you mind if I look around for a while?",
+            "Sir Jonnel | DA Representative",
+            "DArep_v1.png",
+            "Let them inspect.", new StatsChange(10, 10, 0),
+            "Block them.", new StatsChange(-10, -20, 0),
+            CardType.PLOT
+        ));
+        
+        Card plot3_choice2_zoomed = createBranchingPlotCard(
+            "“Mrs. Cynthia: I want this resolved immediately, Atty.”",
+            "",
+            "chat_zoomed.png",
+            "...", null, null,
+            "...", null, null
+        );
+
+        Card plot3_choice2_full = createBranchingPlotCard(
+            "...",
+            "",
+            "chat_full.png",
+            "...", null, plot3_choice2_zoomed,
+            "...", null, plot3_choice2_zoomed
+        );
+
+        Card plot3_choice2_cp = createBranchingPlotCard(
+            "...",
+            "",
+            "cp_blank.png",
+            "...", null, plot3_choice2_full,
+            "...", null, plot3_choice2_full
+        );
+
+        Card plot3_choice1 = createBranchingPlotCard(
+            "Yes, we know each other. I told you, I’ve been here before, so I’ve seen her too.",
+            "Anton | Friend",
+            "lawyer_v1.png",
+            "Believe him", new StatsChange(0, 10, 0), null,
+            "Be suspicious.", new StatsChange(0, -10, 0), null
+        );
+
+        Card plot3_branch1 = createBranchingPlotCard(
+            "Tita mo yun diba? Ang panganay ni Lola Emelda?",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "Keep it and confront Anton.", null, plot3_choice1,
+            "Keep it and snoop on Anton’s phone.", null, plot3_choice2_cp
+        );
+
+        Card plot3 = createBranchingPlotCard(
+            "Sa kaibigan mo ba itong cellphone? May tumatawag kanina, Mrs. Cynthia raw.",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "...", null, plot3_branch1,
+            "...", null, plot3_branch1
+        );
+
+        plotCards.add(plot3);
+
+        plotCards.add(createCard(
+            "Marsss! wala na akong pambili ng bigas. Pwede ba pautang?",
+            "Marites | Neighbor",
+            "marites_v3.png",
+            "Lend her money.", new StatsChange(0, 10, -10),
+            "Decline.", new StatsChange(0, -20, 10),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "This season, we need to decide how much water to allocate for the farmers. What do you think we should do?",
+            "Mayor Edna | Mayor",
+            "mayor_v1.png",
+            "Share more water.", new StatsChange(-10, 20, 0),
+            "Keep full supply.", new StatsChange(20, -10, 10),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "May seed subsidy po kami for your farm. Gusto niyo ba i-accept?",
+            "Sir Jonnel | DA Representative",
+            "DArep_v1.png",
+            "Accept.", new StatsChange(20, 10, 0),
+            "Decline.", new StatsChange(-10, 20, 10),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "Naririnig ko nung nakaraan sa mga kumare ko na may kamag-anak mo raw na nagbabalak kunin ang lupa niyo. Totoo ba? Paano ka niyan?",
+            "Marites | Neighbor",
+            "marites_v3.png",
+            "Give her information.", new StatsChange(0, 20, 0),
+            "Tell her to mind her own business.", new StatsChange(0, -20, 0),
+            CardType.PLOT
+        ));
+
+        plotCards.add(createCard(
+            "May option kayo: chemical pesticide o organic methods. Ano pipiliin niyo?",
+            "Sir Jonnel | DA Representative",
+            "DArep_v1.png",
+            "Use chemical pesticide.", new StatsChange(10, -10, 0),
+            "Use organic methods.", new StatsChange(20, 0, -10),
+            CardType.PLOT
+        ));
+
+        Card plot4_branch5 = createBranchingPlotCard(
+            "HEARING ON-GOING.\nAwaiting the outcome of the lawsuit.",
+            "Judge",
+            "law_scales.png",
+            "", null, null,
+            "", null, null
+        );
+
+        //add one more card here
+        Card plot4_branch4 = createBranchingPlotCard(
+            "HEARING:\n“Case filed: Illegal land ownership. The court will take into account the current condition of the land, the financial capability of the current person-in-charge to maintain it, and the sentiments of the witnesses from the village taking the stand.",
+            "Judge",
+            "law_scales.png",
+            "", null, plot4_branch5,
+            "", null, plot4_branch5
+        );
+
+        Card plot4_branch3 = createBranchingPlotCard(
+            "Word's don't matter without proof. We already filed a case about this. Magkita na lang tayo sa munisipyo.",
+            "Tita Cynthia | Aunt",
+            "aunt_v1.png",
+            "Agree to attend.", new StatsChange(0, 10, 0), plot4_branch4,
+            "Tell her to stop threatening you.", new StatsChange(0, -10, 0), plot4_branch4
+        );
+
+        Card plot4_branch2 = createBranchingPlotCard(
+            "In the absence of your grandmother’s last will, the farm legally passed to Ma’am Cynthia. Unless it is proven that she cannot take care of it on her own.",
+            "Atty. Anton | Attorney",
+            "lawyer_v1.png",
+            "What the hell, Anton?", null, plot4_branch3,
+            "I never expected you to betray me, Anton.", null, plot4_branch3
+        );
+
+        Card plot4_branch1 = createBranchingPlotCard(
+            "I’m the rightful heiress to this land — Nanay’s firstborn. Lahat ng ari‑arian niya ay legally mine, including your farm.",
+            "Tita Cynthia | Aunt",
+            "aunt_v1.png",
+            "Lola Emelda left it for me to maintain!", null, plot4_branch2,
+            "You’re lying!", null, plot4_branch2
+        );
+
+        Card plot4 = createBranchingPlotCard(
+            "How’s the farm doing? It’s going to be mine soon—did you at least take care of it?",
+            "Tita Cynthia | Aunt",
+            "aunt_v1.png",
+            "What do you mean?", null, plot4_branch1,
+            "How is it your land?", null, plot4_branch1
+        );
+
+        plotCards.add(plot4);
 
         return plotCards;
     }
@@ -424,7 +649,7 @@ public class CardData {
         ));
 
         endingCards.add(new EndingCard(
-            "You managed to maintain the farm’s condition despite all the organic encounters. The court decided to give you the ownership of the land. Yis galing!", 
+            "You managed to maintain the farm’s condition despite all the organic encounters. The court decided to give you the ownership of the land.", 
             null, 
             "good_ending.png",
             null, null
