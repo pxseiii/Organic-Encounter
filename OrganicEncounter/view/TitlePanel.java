@@ -18,7 +18,7 @@ public class TitlePanel{
 
     public TitlePanel(){
         mainPanel = new JPanel(null){
-            private Image background = new ImageIcon("images/bg_flat_v1_colored.png").getImage();
+            private Image background = new ImageIcon("OrganicEncounter/images/bg_flat_v1_colored.png").getImage();
         
             @Override
             protected void paintComponent(Graphics g){
@@ -30,11 +30,11 @@ public class TitlePanel{
         int width=220;
         int height = 56;
 
-        ImageIcon buttonDefault = new ImageIcon("images/normal.png");
+        ImageIcon buttonDefault = new ImageIcon("OrganicEncounter/images/normal.png");
         Image scaledButt = buttonDefault.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon buttonPressed = new ImageIcon("images/pressed.png");
+        ImageIcon buttonPressed = new ImageIcon("OrganicEncounter/images/pressed.png");
         Image scaledButtP = buttonPressed.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon buttonHover = new ImageIcon("images/hovered.png");
+        ImageIcon buttonHover = new ImageIcon("OrganicEncounter/images/hovered.png");
         Image scaledButtH = buttonHover.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
         startButton = new JButton(new ImageIcon(scaledButt));
@@ -47,7 +47,7 @@ public class TitlePanel{
 
         int iconSize = 295;
 
-        ImageIcon icon = new ImageIcon("images/logo.png");
+        ImageIcon icon = new ImageIcon("OrganicEncounter/images/logo.png");
         Image scaledIcon = icon.getImage().getScaledInstance(iconSize,iconSize+15, Image.SCALE_SMOOTH);
         
         JLabel iconLabel = new JLabel(new ImageIcon(scaledIcon));
