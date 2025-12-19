@@ -33,7 +33,7 @@ public class CircleLayer extends JPanel{
         int radius;
         int absNum = Math.abs(change);
         switch (absNum){
-            case 10: radius = 5; break;
+            case 10: radius = 3; break;
             case 20: radius = 7; break;
             default: radius = 0;
         }
@@ -54,7 +54,7 @@ public class CircleLayer extends JPanel{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         for (Circle c : circles){
-            g.setColor(Color.RED);
+            g.setColor(Color.WHITE);
             g.fillOval(c.x - c.radius, c.y - c.radius, c.radius * 2, c.radius *2);
         }
     }

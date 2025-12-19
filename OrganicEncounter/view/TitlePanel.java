@@ -10,7 +10,7 @@ public class TitlePanel{
 
     public TitlePanel(){
         mainPanel = new JPanel(null){
-            private Image background = new ImageIcon("OrganicEncounter/images/bg_flat_v1_colored.png").getImage();
+            private Image background = new ImageIcon("images/bg_flat_v1_colored.png").getImage();
         
             @Override
             protected void paintComponent(Graphics g){
@@ -19,8 +19,8 @@ public class TitlePanel{
             }
         };
 
-        ImageIcon buttonDefault = new ImageIcon("OrganicEncounter/images/1.png");
-        ImageIcon buttonPressed = new ImageIcon("OrganicEncounter/images/2.png");
+        ImageIcon buttonDefault = new ImageIcon("images/1.png");
+        ImageIcon buttonPressed = new ImageIcon("images/2.png");
         // ImageIcon buttonHover = new ImageIcon("");
 
         startButton = new JButton(buttonDefault);

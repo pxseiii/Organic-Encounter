@@ -38,8 +38,8 @@ public class CardPanel extends JPanel{
         card = new JPanel(new BorderLayout(10,10));
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Color.GRAY, 5, true),
-            BorderFactory.createEmptyBorder(20,20,20,20)    // adds invisible padding 
+            BorderFactory.createLineBorder(Color.GRAY, 2, true),
+            BorderFactory.createEmptyBorder(20,20,0,20)    // adds invisible padding 
         ));
         add(card, BorderLayout.CENTER);
 
@@ -51,10 +51,10 @@ public class CardPanel extends JPanel{
         textPanel.setOpaque(false);
 
         leftLabel = new JLabel("<html>Left choice...</html>");
-        leftLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        leftLabel.setFont(new Font("Space Mono", Font.PLAIN, 14));
     
         rightLabel = new JLabel("<html>Right choice...</html>");
-        rightLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        rightLabel.setFont(new Font("Space Mono", Font.PLAIN, 14));
         rightLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         
         textPanel.add(leftLabel);
@@ -78,8 +78,8 @@ public class CardPanel extends JPanel{
         // store
         currentCard = card;
 
-        ImageIcon icon = new ImageIcon("OrganicEncounter/images/" + card.getIcon());
-        Image scaled = icon.getImage().getScaledInstance(500, 450, Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon("images/" + card.getIcon());
+        Image scaled = icon.getImage().getScaledInstance(450, 400, Image.SCALE_SMOOTH);
         iconLabel.setIcon(new ImageIcon(scaled));
         
         if (card.getLeftChoice() != null && card.getRightChoice() != null){           // since endingCard also uses this but doesnt have left/right choice

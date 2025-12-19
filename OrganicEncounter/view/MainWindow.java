@@ -23,7 +23,7 @@ public class MainWindow  {
     public MainWindow(){                                        
         // ---------- MAIN WINDOW ----------
         frame = new JFrame("Organic Encounter");
-        frame.setSize(500, 750);
+        frame.setSize(500, 770);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
@@ -49,4 +49,16 @@ public class MainWindow  {
     public TitlePanel getTitlePanel() { return titlePanel; };
     public GamePanel getGamePanel() { return gamePanel; };
     public EndPanel getEndPanel() { return endPanel; };
+
+    public void fadeToEndScreen() {
+        PanelFader fader = new PanelFader(mainPanel);
+        fader.setFromTo("GAME", "END");
+        fader.actionPerformed(null);  // trigger fade
+    }
+
+    public JPanel getMainPanel() {
+    return mainPanel;
+}
+
+
 }

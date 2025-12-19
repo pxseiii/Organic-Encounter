@@ -7,8 +7,18 @@ public class EndPanel {
     private JPanel mainPanel;
 
     public EndPanel(){
-        mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.BLACK);
+        //timer
+        
+
+        mainPanel = new JPanel(null){
+            private Image background = new ImageIcon("images/credits.png").getImage();
+        
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
     }
 
     public JPanel getPanel(){
