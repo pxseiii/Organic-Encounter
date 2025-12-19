@@ -6,16 +6,26 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 @ClassInfo(
-    mainAuthor = "Mika",
+    mainAuthor = "De Guzman",
     className = "TitlePanel",
     pillarsUsed = {"Encapsulation"},
     solidUsed = {"SRP"}
 )
 
+/* 
+    Description / Author Comments
+
+    Purpose: 
+    * displays title screen with start button
+    * encapsulates the panel so it'll be accessed by the MainWindow
+*/
+
 public class TitlePanel{
+    // ----------- FIELDS --------------
     private JPanel mainPanel;
     private JButton startButton;
 
+    // ----------- CONSTRUCTOR --------------
     public TitlePanel(){
         mainPanel = new JPanel(null){
             private Image background = new ImageIcon("OrganicEncounter/images/bg_flat_v1_colored.png").getImage();
@@ -62,11 +72,12 @@ public class TitlePanel{
         mainPanel.setBackground(new Color(0xe3e9d8));
     }
 
+    // ----------- GETTER --------------
     public JPanel getPanel(){
         return mainPanel;
     }
 
-    // expose start action
+    // set up listener
     public void setStartListener(ActionListener listener){
         startButton.addActionListener(listener);
     }

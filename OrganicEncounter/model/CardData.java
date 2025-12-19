@@ -9,29 +9,21 @@ import javax.swing.JOptionPane;
     mainAuthor = "Kaindoy",
     className = "CardData",
     pillarsUsed = {},
-    solidUsed = {}
+    solidUsed = {"SRP"}
 )
 
 /* 
+    Description / Author Comments
+
     Purpose: 
-    * holds card/event data (doesn't accept input so static)
+    * holds event card data (doesn't accept input so static)
     * supplies lists of cards for CardManager
 */
 
 public class CardData {
-    
-    // helper method to create different types of cards
-    /* createCard parameters
-        * situation
-        * title
-        * icon
-        * leftText
-        * leftStatsChange
-        * rightText
-        * rightStatsChange
-        * type
-     */
+    // ----------- HELPER METHODS --------------
 
+    // used to create different types of cards with no branching next cards
     private static Card createCard(
         String situation, 
         String title, 
@@ -62,6 +54,7 @@ public class CardData {
         INTRO, RANDOM, PLOT
     }
 
+    // used to create plot cards with branching next cards
     private static Card createBranchingPlotCard(
         String situation, 
         String title, 
@@ -74,7 +67,7 @@ public class CardData {
         return new PlotCard(situation, title, icon, left, right);
     }
 
-    // solely for branching in intro
+    // used to create intro cards with branching next cards
     private static Card createBranchingIntroCard(
         String situation, 
         String title, 
@@ -87,19 +80,11 @@ public class CardData {
         return new IntroCard(situation, title, icon, left, right);
     }
 
+
+    // ----------- GETTERS / DATA LISTS --------------
     public static List<Card> getIntroDeck(){
         List<Card> introCards = new ArrayList<>();
 
-        /* 
-        introCards.add(createCard(
-            "",
-            "Reporter",
-            "reporter.jpg",
-            "Ignore. It's just a typhoon", null,
-            "Prepare for it", null,
-            CardType.INTRO
-        ));
-        */
        Card intro1_choice1 = createBranchingIntroCard(
             "Thank you.",
             "Lola Emelda | Grandma",
@@ -251,7 +236,7 @@ public class CardData {
             "mayor_v1.png",
             "Donate generously.", new StatsChange(0, 20, -20),
             "Ignore donation.", new StatsChange(0, -20, 10),
-            CardType.INTRO
+            CardType.PLOT
         ));
 
         return introCards;

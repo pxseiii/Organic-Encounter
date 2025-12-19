@@ -12,8 +12,10 @@ import view.MainWindow;
 )
 
 /*
-    Description / Author Comments:
-    * Purpose: solely to start the game / launch the system
+    Description / Author Comments
+
+    * Purpose:
+    * solely to start the game / launch the system
     * note: invokeLater launches the GUI on the Event Dispatch Thread 
     * (the only thread that should create or update Swing UI components).
  */

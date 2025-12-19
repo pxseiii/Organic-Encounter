@@ -13,29 +13,32 @@ import annotation.ClassInfo;
     Description / Author Comments
 
     Purpose: 
-    * Represents a change to player's stats
-    * Can be applied to a Stats object
-    * Supports “no effect” choices
+    * represents a change to player's stats (health, rep, money)
+    * a card could have 0, 1, or 2 StatsChange object
+    * supports “no effect” choices
 */
 
 public class StatsChange {
-    public static final StatsChange NONE = new StatsChange(0, 0, 0);
-
+    // ----------- FIELDS --------------
     private final int healthChange;
     private final int repChange;
     private final int moneyChange;
 
+    // ----------- CONSTRUCTOR --------------
     public StatsChange(int healthChange, int repChange, int moneyChange) {
         this.healthChange = healthChange;
         this.repChange = repChange;
         this.moneyChange = moneyChange;
     }
 
+    // ----------- GETTERS --------------
+    // used in GamePanel to read stats change data to draw circle indicators 
     public int getHealthChange() { return healthChange; }
     public int getRepChange() { return repChange; }
     public int getMoneyChange() { return moneyChange; }
 
-    // apply effect to stats
+    // ----------- METHODS --------------
+    // used in CardChoice to apply stat changes to player's stats
     public void applyTo(Stats stats) {
         stats.modifyHealth(healthChange);
         stats.modifyRep(repChange);

@@ -10,10 +10,11 @@ import annotation.ClassInfo;
 )
 
 /* 
+    Description / Author Comments
+
     Purpose: 
     * encapsulates a choice on a card
     * contains the text & consequences (stat change) of one possible player choice
- 
 */
 
 public class CardChoice {

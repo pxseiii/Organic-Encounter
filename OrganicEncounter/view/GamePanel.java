@@ -241,7 +241,7 @@ public class GamePanel {
             return new JLabel(new ImageIcon(scaled));
         } catch (Exception e) {
             // Only use error.jpg - no text fallback
-            ImageIcon errorIcon = new ImageIcon("C:\\Users\\somet\\Desktop\\OrganicEncounter\\images\\error.png");
+            ImageIcon errorIcon = new ImageIcon("OrganicEncounter/images/error.png");
             Image scaled = errorIcon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
             return new JLabel(new ImageIcon(scaled));
         }

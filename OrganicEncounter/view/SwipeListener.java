@@ -2,13 +2,20 @@ package view;
 import annotation.ClassInfo;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "SwipeListener",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Abstraction"},
+    solidUsed = {"SRP, DIP"}
 )
 
-// for user-input only, Presenter implements the interface
+/* 
+    Description / Author Comments
+
+    Purpose: 
+    * defines an abstraction for handling swipe actions (L/R)
+    * allows Presenter to implement the behavior
+*/
+
 public interface SwipeListener {
     void onSwipeLeft();
     void onSwipeRight();

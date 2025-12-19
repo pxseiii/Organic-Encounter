@@ -7,39 +7,43 @@ import javax.swing.*;
 import model.*;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "CardPanel",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Encapsulation, Inheritance, Polymorphism"},
+    solidUsed = {"SRP, OCP, ISP, DIP"}
 )
 
 /* 
+    Description / Author Comments
+
     Purpose: 
     * all about the card's UI and motion
     * detects L/R actions and sends event to Presenter (Game)
+    * notifies GamePanel of card's motion for circle indicators
 */
 
 public class CardPanel extends JPanel{
+    // ----------- FIELDS --------------
     private JPanel card;
     private Card currentCard;
-
     private JLabel leftLabel, rightLabel, iconLabel;
 
-    private int origX;                          // since horizontal motion only
-    private int swipeThreshold = 80;            // how far before considered a swipe
-    private int pressX;
+    private int origX;                                  // original X position of card
+    private int swipeThreshold = 80;                    // how far before considered a swipe
+    private int pressX;                                 // the X position when mouse was pressed
 
-    private GamePanel gamePanel;
-
+    private GamePanel gamePanel;                        // gamePanel reference for circle indicators
     private SwipeListener listener;
+
+    // set up swipe listener
     public void setSwipeListener(SwipeListener listener) {
         this.listener = listener;
     }
     
+    // ----------- CONSTRUCTOR --------------
     public CardPanel(GamePanel gamePanel){
         setLayout(new BorderLayout());
         setBackground(new Color(230, 230, 230));
-
         this.gamePanel = gamePanel;
 
         // ---------- CARD CONTAINER ----------
@@ -51,10 +55,10 @@ public class CardPanel extends JPanel{
         ));
         add(card, BorderLayout.CENTER);
 
-        origX = card.getX();                    // store initial position
+        origX = card.getX();                              // store initial position
 
 
-        // --------- choices panel
+        // ---------- CHOICES PANEL ----------
         JPanel textPanel = new JPanel(new GridLayout(1,2));
         textPanel.setOpaque(false);
 
@@ -70,22 +74,27 @@ public class CardPanel extends JPanel{
         card.add(textPanel, BorderLayout.NORTH);
 
 
-        // --------- icon
+        // ---------- ICON ----------
         iconLabel = new JLabel();
         iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
         iconLabel.setPreferredSize(new Dimension(250, 250));
-
         card.add(iconLabel, BorderLayout.CENTER);
 
+        // set up motion of the card
         setupMotion();
     }
 
+
+    // ---------- METHODS ----------
+    
+    // displays card
     public void displayCard(Card card) {    
         if (card == null) return;
 
         // store
         currentCard = card;
 
+        // ---------- LOAD ICON ----------
         // for icon check
         String iconPath = card.getIcon();
         
@@ -114,9 +123,10 @@ public class CardPanel extends JPanel{
             }
         }
         
+        // ---------- UPDATE CHOICES ----------
         if (card.getLeftChoice() != null && card.getRightChoice() != null){           // since endingCard also uses this but doesnt have left/right choice
-            leftLabel.setText("<html>" + card.getLeftChoice().getText() + "</div></html>");
-            rightLabel.setText("<html>" + card.getRightChoice().getText() + "</div></html>");
+            leftLabel.setText("<html>" + card.getLeftChoice().getText() + "</html>");
+            rightLabel.setText("<html><div style='text-align:right;'>" + card.getRightChoice().getText() + "</div></html>");
             leftLabel.setVisible(true);
             rightLabel.setVisible(true);
         } else {
@@ -129,16 +139,14 @@ public class CardPanel extends JPanel{
     }
 
     
-
+    // sets up motion and swipe listener to detect user input
     private void setupMotion(){
-        // --------- DRAG LISTENER ---------
-        // to detects user input
 
-        // when user presses the mouse down
+        // when user presses the mouse and release
         card.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                pressX = e.getX();
+                pressX = e.getX();                          // record inital mouse X
             }
 
             @Override
@@ -152,6 +160,7 @@ public class CardPanel extends JPanel{
                         listener.onSwipeRight();
                     }
                 }
+                
                 // reset UI
                 card.setLocation(origX, card.getY());
                 gamePanel.drawCircleIndicator(null);
@@ -161,7 +170,8 @@ public class CardPanel extends JPanel{
         // when user drags the card L/R
         card.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged(MouseEvent e) {            // only notifies and does nothing visually when mouse button is down and moving; hence why its overriden
+            public void mouseDragged(MouseEvent e) {
+                // only notifies and does nothing visually when mouse button is down and moving; hence why its overriden           
                 int newX = card.getX() + (e.getX() - pressX);   // updates everytime the current position of mouse is tracked
                 card.setLocation(newX, card.getY());            // swing repaints it at new loc
 

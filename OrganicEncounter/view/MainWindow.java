@@ -14,7 +14,9 @@ import javax.swing.*;
     Description / Author Comments
 
     Purpose: 
-    * switching panels
+    * the top-level window (JFrame)
+    * switches between different screens (Title, Game, End)
+    * encapsulates frame and panels
 */
 
 public class MainWindow  {

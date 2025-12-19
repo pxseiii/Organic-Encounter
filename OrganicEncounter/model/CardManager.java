@@ -4,17 +4,18 @@ import annotation.ClassInfo;
 import java.util.List;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "MainWindow",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Encapsulation"},
+    solidUsed = {"SRP"}
 )
-// import java.util.Random;
+
 /* 
+    Description / Author Comments
+
     Purpose: 
-    * Manages different categories of cards
-    * Returns card depending on game progress
-    * card flow
+    * manages different categories of cards
+    * returns card depending on game progress
 */
 
 public class CardManager {
@@ -34,7 +35,7 @@ public class CardManager {
         introCards = CardData.getIntroDeck();
         randomCards = CardData.getRandomDeck();
         plotCards = CardData.getPlotDeck();
-        endingCards = CardData.getPlotDeck();
+        endingCards = CardData.getEndingDeck();
     }
 
     // ----------- HELPER METHODS --------------

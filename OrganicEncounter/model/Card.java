@@ -10,18 +10,11 @@ import annotation.ClassInfo;
 )
 
 /* 
+    Description / Author Comments
+
     Purpose: 
-    * represents an event / card with the attributes: situation, icon, and choices
-    
-    Pillars used:
-    * Abstraction - represents gameplay concept as a simple Java object
-    * Encapsulation
-    * Polymorphism
-    * Inheritance
-    
-    Principles:
-    * SRP: only card data
-    * OCP: abstract Card
+    * represents an event card 
+    * holds core attributes of a card: situation text, character title, icon, and two possible choices (left/right)
 */
 
 // ----------- ABSTRACT PARENT CLASS --------------
