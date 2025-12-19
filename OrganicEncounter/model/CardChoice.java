@@ -1,5 +1,14 @@
 package model;
 
+import annotation.ClassInfo;
+
+@ClassInfo(
+    mainAuthor = "Kaindoys",
+    className = "CardChoice",
+    pillarsUsed = {"Encapsulation"},
+    solidUsed = {"SRP"}
+)
+
 /* 
     Purpose: 
     * encapsulates a choice on a card
