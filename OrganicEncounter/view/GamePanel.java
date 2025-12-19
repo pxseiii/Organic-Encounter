@@ -1,8 +1,16 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import javax.swing.*;
 import model.*;
+
+@ClassInfo(
+    mainAuthor = "Mika",
+    className = "GamePanel",
+    pillarsUsed = {"Encapsulation"},
+    solidUsed = {"SRP"}
+)
 
 public class GamePanel {
 
