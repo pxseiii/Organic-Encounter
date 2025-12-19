@@ -1,8 +1,15 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import javax.swing.*;
 
+@ClassInfo(
+    mainAuthor = "",
+    className = "MainWindow",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 /* 
     Purpose: 
     * for switching
