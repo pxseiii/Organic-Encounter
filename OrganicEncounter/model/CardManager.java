@@ -80,13 +80,5 @@ public class CardManager {
         }
         return null;
     }
-    
-    /*
-    // reset game progress?
-    public void reset(){
-        introIndex = 0;
-        plotIndex = 0;
-    }
-    */
 }
 
