@@ -29,7 +29,6 @@ public class CircleLayer extends JPanel{
     // ----------- INNER CLASS --------------
     private static class Circle {
         int x, y, radius;
-        Color color = Color.WHITE;
         
         // ----------- INNER CLASS CONSTRUCTOR --------------
         Circle(int x, int y, int radius){
