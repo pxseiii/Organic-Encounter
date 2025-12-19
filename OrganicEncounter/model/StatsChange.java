@@ -1,5 +1,14 @@
 package model;
 
+import annotation.ClassInfo;
+
+@ClassInfo(
+    mainAuthor = "",
+    className = "StatsChange",
+    pillarsUsed = {},
+    solidUsed = {}
+)
+
 /* 
     Purpose: 
     * Represents a change to player's stats
