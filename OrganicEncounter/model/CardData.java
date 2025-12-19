@@ -1,8 +1,16 @@
 package model;
 
+import annotation.ClassInfo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+@ClassInfo(
+    mainAuthor = "Kaindoy",
+    className = "CardData",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 
 /* 
     Purpose: 
