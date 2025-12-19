@@ -26,6 +26,7 @@ public class Game implements SwipeListener {
     private Card currentCard;
     private Card endingCard;
 
+    private int day = 0;
     private boolean isEnding = false;
 
     public Game(MainWindow ui){
@@ -37,6 +38,7 @@ public class Game implements SwipeListener {
     private void startNewGame(){
         cardManager = new CardManager();
         playerStats = new Stats(50, 50, 50);
+        day = 0;
         
         ui.getGamePanel().getCardPanel().setSwipeListener(this);
         isEnding = false;
@@ -86,10 +88,17 @@ public class Game implements SwipeListener {
         }           
 
         // check if there's branching
-        currentCard = choice.hasNextCard() ? choice.getNextCard() : cardManager.getNextCard();
+        boolean isBranching = choice != null && choice.hasNextCard();
+
+        currentCard = isBranching ? choice.getNextCard() : cardManager.getNextCard();
+
+        if (!isBranching && currentCard.updatesDay()){
+            day += (int) (Math.random() * 7) + 1;
+        }
 
         // update UI
         if (currentCard != null){
+            ui.getGamePanel().setDay(day);
             ui.getGamePanel().update(currentCard, playerStats); // sends next card to MainWindow
         }
 
@@ -130,5 +139,8 @@ public class Game implements SwipeListener {
     }
 
 }
+
+
+
 
 
