@@ -1,5 +1,14 @@
 package model;
 
+import annotation.ClassInfo;
+
+@ClassInfo(
+    mainAuthor = "Kaindoy",
+    className = "Card",
+    pillarsUsed = {"Encapsulation","Inheritance", "Abstraction", "Polymorphism"},
+    solidUsed = {"SRP"}
+)
+
 /* 
     Purpose: 
     * holds card attributes: situation, icon, choices, effects
