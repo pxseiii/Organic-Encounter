@@ -160,7 +160,7 @@ public class CardData {
         );
 
         // tutorial
-        Card tutorial4 = createBranchingIntroCard(
+        Card tutorial5 = createBranchingIntroCard(
             "Your farm will face various threats daily, and you have to maintain everything in balance. May luck be ever in your favor.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
@@ -168,16 +168,24 @@ public class CardData {
             "I’m ready.", null            // game proper
         );
 
-        Card tutorial3 = createBranchingIntroCard(
+        Card tutorial4 = createBranchingIntroCard(
             "Survive the daily encounter with nature. Defeat the pests, weather, and all that threatens the farm’s condition. I wish you luck.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
             "I understand", null,         // game proper                 
-            "I don’t understand", tutorial4
+            "I don’t understand", tutorial5
+        );
+
+        Card tutorial3 = createBranchingIntroCard(
+            "The effect indicator can be found above the factors’ icons.",
+            "Mang Gido | Caretaker",
+            "caretaker_v1.png",
+            "So all I have to do is maintain it?", tutorial4,                    
+            "What am I going to do with these?", tutorial4
         );
 
         Card tutorial2 = createBranchingIntroCard(
-            "We have three factors to manage: land prosperity, reputation, and finance. Maintain balance across all factors; do not let any factor be too high or too low compared to the others. The effect indicator can be found above the factors’ icons.",
+            "We have three factors to manage: land prosperity, reputation, and finance. Maintain balance across all factors; do not let any factor be too high or too low compared to the others.",
             "Mang Gido | Caretaker",
             "caretaker_v1.png",
             "So all I have to do is maintain it?", tutorial3,                    
@@ -548,7 +556,7 @@ public class CardData {
             CardType.PLOT
         ));
 
-        Card plot4_branch5 = createBranchingPlotCard(
+        Card plot4_branch6 = createBranchingPlotCard(
             "HEARING ON-GOING.\nAwaiting the outcome of the lawsuit.",
             "Judge",
             "law_scales.png",
@@ -557,28 +565,36 @@ public class CardData {
         );
 
         //add one more card here
-        Card plot4_branch4 = createBranchingPlotCard(
-            "HEARING:\n“Case filed: Illegal land ownership. The court will take into account the current condition of the land, the financial capability of the current person-in-charge to maintain it, and the sentiments of the witnesses from the village taking the stand.",
+        Card plot4_branch5 = createBranchingPlotCard(
+            "HEARING:\n“Case filed: Illegal land ownership. The court will take into account the current condition of the land and the financial capability of the current person-in-charge to maintain it.",
             "Judge",
             "law_scales.png",
-            "", null, plot4_branch5,
-            "", null, plot4_branch5
+            "", null, plot4_branch6,
+            "", null, plot4_branch6
         );
 
-        Card plot4_branch3 = createBranchingPlotCard(
+        Card plot4_branch4 = createBranchingPlotCard(
             "Word's don't matter without proof. We already filed a case about this. Magkita na lang tayo sa munisipyo.",
             "Tita Cynthia | Aunt",
             "aunt_v1.png",
-            "Agree to attend.", new StatsChange(0, 10, 0), plot4_branch4,
-            "Tell her to stop threatening you.", new StatsChange(0, -10, 0), plot4_branch4
+            "Agree to attend.", new StatsChange(0, 10, 0), plot4_branch5,
+            "Tell her to stop threatening you.", new StatsChange(0, -10, 0), plot4_branch5
         );
 
-        Card plot4_branch2 = createBranchingPlotCard(
+        Card plot4_branch3 = createBranchingPlotCard(
             "In the absence of your grandmother’s last will, the farm legally passed to Ma’am Cynthia. Unless it is proven that she cannot take care of it on her own.",
             "Atty. Anton | Attorney",
             "lawyer_v1.png",
-            "What the hell, Anton?", null, plot4_branch3,
-            "I never expected you to betray me, Anton.", null, plot4_branch3
+            "What the hell, Anton?", null, plot4_branch4,
+            "I never expected you to betray me, Anton.", null, plot4_branch4
+        );
+
+        Card plot4_branch2 = createBranchingPlotCard(
+            "Ikaw? Anak ka lang ng paborito niyang anak. That’s why she only talked and left nothing in writing. Words don’t matter without proof.",
+            "Tita Cynthia | Aunt",
+            "aunt_v1.png",
+            "..!", null, plot4_branch3,
+            "..?", null, plot4_branch3
         );
 
         Card plot4_branch1 = createBranchingPlotCard(
