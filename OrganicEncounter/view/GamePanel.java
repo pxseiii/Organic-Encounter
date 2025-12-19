@@ -1,6 +1,5 @@
 package view;
 
-import annotation.ClassInfo;
 import java.awt.*;
 import javax.swing.*;
 import model.*;
@@ -40,7 +39,6 @@ public class GamePanel {
     private int animTargetHealth, animTargetRep, animTargetMoney;
 
     private boolean firstUpdate = true;
-    private int day = 1;
 
     public GamePanel() {
         mainPanel = new JPanel();
@@ -93,11 +91,11 @@ public class GamePanel {
         factorLayeredPane.add(repBar, Integer.valueOf(1));
         factorLayeredPane.add(moneyBar, Integer.valueOf(1));
 
-        healthIconLabel = createIcon("images/lp.png", iconSize);
+        healthIconLabel = createIcon("OrganicEncounter/images/lp.png", iconSize);
         healthIconLabel.setBounds(leftMargin, yOffset, iconSize, iconSize);
-        repIconLabel = createIcon("images/rep.png", iconSize);
+        repIconLabel = createIcon("OrganicEncounter/images/rep.png", iconSize);
         repIconLabel.setBounds(leftMargin + iconSize + spacing, yOffset, iconSize, iconSize);
-        moneyIconLabel = createIcon("images/finance.png", iconSize);
+        moneyIconLabel = createIcon("OrganicEncounter/images/finance.png", iconSize);
         moneyIconLabel.setBounds(leftMargin + 2 * iconSize + 2 * spacing, yOffset, iconSize, iconSize);
 
         factorLayeredPane.add(healthIconLabel, Integer.valueOf(2));
@@ -190,7 +188,7 @@ public class GamePanel {
         characPanel.setMaximumSize(characSize);
         characPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        dayLabel = new JLabel("DAY 1", SwingConstants.CENTER);
+        dayLabel = new JLabel("DAY 0" , SwingConstants.CENTER);
         dayLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 18));
         dayLabel.setForeground(Color.WHITE);
 
@@ -242,13 +240,17 @@ public class GamePanel {
         bar.setBackground(new Color(0xafb5af));
 
         // mac L
-        // bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
+        bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
 
         return bar;
     }
 
     public JPanel getPanel() {
         return mainPanel;
+    }
+
+    public void setDay(int day){
+        dayLabel.setText("DAY " + day);
     }
 
     public void update(Card card, Stats stats) {
@@ -260,7 +262,6 @@ public class GamePanel {
         situationLabel.setText(card.getSituation());
 
         characLabel.setText(card.getTitle());
-        dayLabel.setText("DAY " + day++);
 
         cardPanel.displayCard(card);
 
