@@ -1,8 +1,16 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+@ClassInfo(
+    mainAuthor = "Mika",
+    className = "TitlePanel",
+    pillarsUsed = {"Encapsulation"},
+    solidUsed = {"SRP"}
+)
 
 public class TitlePanel{
     private JPanel mainPanel;
