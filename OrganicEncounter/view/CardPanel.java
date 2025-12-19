@@ -113,7 +113,7 @@ public class CardPanel extends JPanel{
                 
             } catch (Exception e) {
                 try {
-                    ImageIcon errorIcon = new ImageIcon("C:OrganicEncounter/images/error.png");
+                    ImageIcon errorIcon = new ImageIcon("OrganicEncounter/images/error.png");
                     Image scaled = errorIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
                     iconLabel.setIcon(new ImageIcon(scaled));
                 } catch (Exception ex) {
