@@ -1,12 +1,17 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-// radius 5 for +10 or -10 
-// radius 7 for +20 or -20 
+@ClassInfo(
+    mainAuthor = "",
+    className = "CircleLayer",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 
 public class CircleLayer extends JPanel{
     private static class Circle {
