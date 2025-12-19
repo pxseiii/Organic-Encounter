@@ -5,48 +5,75 @@ import model.*;
 import view.*;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "Game",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Encapsulation, Polymorphism"},
+    solidUsed = {"SRP, LSP, DIP"}
 )
 
 /* 
+    Description / Author Comments
+
     Purpose: 
-    * acts as the Presenter in MVP
-    * Initialize game logic (model) + UI (view)
-    * handles swipe events, applies CardChoice effects to stats
-    * updates UI and manages game flow (incl endings)
+    * the Presenter in MVP (connects the Model (game data) and View (UI))
+    * manages the game flow (tracks current cards, player stats, and game day)
+    * handles user input (swipe left/right) and applies a choice's effects on stats
+    * updates UI throughout the game
 */
 
 public class Game implements SwipeListener {
-    private CardManager cardManager;
+    // ----------- FIELDS --------------
+    private CardManager cardManager;                                // manages the card decks and game progression
     private MainWindow ui;
     private Stats playerStats;
-    private Card currentCard;
-    private Card endingCard;
+    private Card currentCard;                                       // card currently displayed
+    private Card endingCard;                                        // stores ending card if game reaches an ending
 
-    private int day = 0;
-    private boolean isEnding = false;
+    private int day;
+    private boolean isEnding = false;                               // flag indicating if game reached an ending
 
+    // ----------- CONSTRUCTOR --------------
     public Game(MainWindow ui){
         this.ui = ui;
+
+        // setup start button listener to launch game
         ui.getTitlePanel().setStartListener(e -> startNewGame());
         ui.showTitleScreen();
     }
 
+    // ----------- GAME FLOW METHODS --------------
+
+    // sets ups the game: resets stats, cards, day, and UI
     private void startNewGame(){
-        cardManager = new CardManager();
+        cardManager = new CardManager();                            
         playerStats = new Stats(50, 50, 50);
         day = 0;
         
-        ui.getGamePanel().getCardPanel().setSwipeListener(this);
+        ui.getGamePanel().getCardPanel().setSwipeListener(this);    // connects Presenter to the card panel's swipe events 
         isEnding = false;
         
         ui.showGameScreen();
         showNextCard();
     }
 
+    // shows first card to display
+    private void showNextCard(){
+        currentCard = cardManager.getNextCard();
+        if (currentCard != null){
+            ui.getGamePanel().update(currentCard, playerStats, day); 
+        } else {
+            // if no more cards, show final ending
+            Card finalEnding = cardManager.getEnding(playerStats);
+            if (finalEnding != null){
+                endingCard = finalEnding;                       
+                isEnding = true;
+                ui.getGamePanel().showEndingCard(finalEnding);
+            }
+        }
+    }
+
+
+    // ----------- INPUT HANDLERS --------------
     @Override 
     public void onSwipeRight() {
         if (isEnding && endingCard != null){
@@ -65,18 +92,21 @@ public class Game implements SwipeListener {
         }
     }
 
-    private void handleLastSwipe(){      // for swiping ending card
+    // when swiping ending card
+    private void handleLastSwipe(){     
         ui.showEndingScreen(); 
         
+        // reset state
         isEnding = false;
         endingCard = null;
 
-        //after 2 seconds, return to title
+        // auto-return to title after 2 seconds of showing ending screen
         javax.swing.Timer t = new javax.swing.Timer(2000, e -> ui.showTitleScreen());
         t.setRepeats(false);
         t.start();
     }
 
+    // handles a player's choice and updates game state
     private void handleChoice(boolean isRight){
         if (currentCard == null) return;
 
@@ -87,53 +117,39 @@ public class Game implements SwipeListener {
             choice.applyEffect(playerStats); 
         }           
 
-        // check if there's branching
+        // check if this choice has a branching next card
         boolean isBranching = choice != null && choice.hasNextCard();
 
+        // determine next card: either branching card or next card from manager
         currentCard = isBranching ? choice.getNextCard() : cardManager.getNextCard();
 
+        // increments day
         if (!isBranching && currentCard.updatesDay()){
             day += (int) (Math.random() * 7) + 1;
         }
 
         // update UI
         if (currentCard != null){
-            ui.getGamePanel().setDay(day);
-            ui.getGamePanel().update(currentCard, playerStats); // sends next card to MainWindow
+            ui.getGamePanel().update(currentCard, playerStats, day); // sends next card to MainWindow
         }
 
         // check factor-based endings first
         Card factorEnding = cardManager.getFactorEnding(playerStats);
         if (factorEnding != null){
-            endingCard = factorEnding;                  // stores ending card
+            endingCard = factorEnding;                  
             isEnding = true;
             ui.getGamePanel().showEndingCard(factorEnding);
-            return;                                     // stop game flow
+            return;                                             // stop game flow
         }
 
-        // check if plot cards are finished for final ending
+        // if no more cards, check for final ending based on average stats
         if (currentCard == null){
             Card finalEnding = cardManager.getEnding(playerStats);
             if (finalEnding != null){
-                endingCard = finalEnding;                  // stores ending card
+                endingCard = finalEnding;                  
                 isEnding = true;
                 ui.getGamePanel().showEndingCard(finalEnding);
                 return;
-            }
-        }
-    }
-
-    private void showNextCard(){
-        currentCard = cardManager.getNextCard();
-        if (currentCard != null){
-            ui.getGamePanel().update(currentCard, playerStats); // sends current card to MainWindow
-        } else {
-            // if no more cards, show final ending
-            Card finalEnding = cardManager.getEnding(playerStats);
-            if (finalEnding != null){
-                endingCard = finalEnding;                  // stores ending card
-                isEnding = true;
-                ui.getGamePanel().showEndingCard(finalEnding);
             }
         }
     }

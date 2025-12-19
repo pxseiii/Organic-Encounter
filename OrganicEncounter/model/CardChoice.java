@@ -13,18 +13,15 @@ import annotation.ClassInfo;
     Purpose: 
     * encapsulates a choice on a card
     * contains the text & consequences (stat change) of one possible player choice
-    
-    Concepts used:
-    * Encapsulation
-    * SRP, KISS, YAGNI, DRY
+ 
 */
 
 public class CardChoice {
     private String text;
     private StatsChange effect;
-    private Card nextCard;              // for optional branching
+    private Card nextCard;                              // for optional branching
 
-    // -------------- Overloading Constructors --------------
+    // ----------- CONSTRUCTORS --------------
 
     // for normal cards (no branching); null nextCard means linear flow
     public CardChoice(String text, StatsChange effect) {
@@ -38,13 +35,13 @@ public class CardChoice {
         this.nextCard = nextCard;
     }
 
-    // -------------- Getters --------------
+    // ----------- GETTERS --------------
     public String getText() { return text; }
     public Card getNextCard(){ return nextCard; }       // for ones with branching
     public StatsChange getEffect(){ return effect; }
 
 
-    // -------------- Helper Methods --------------
+    // ----------- HELPER METHODS --------------
     // for checking if a branching card has a next card
     public boolean hasNextCard(){ return nextCard != null; }
 

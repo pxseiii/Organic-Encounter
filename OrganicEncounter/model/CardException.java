@@ -3,17 +3,16 @@ package model;
 import annotation.ClassInfo;
 
 @ClassInfo(
-    mainAuthor = "Mika",
+    mainAuthor = "De Guzman",
     className = "CardException",
-    pillarsUsed = {},
+    pillarsUsed = {"Inheritance"},
     solidUsed = {"SRP"}
 )
 
 class CardException extends RuntimeException{
     public CardException() {}
 
-    public CardException(String message)
-    {
+    public CardException(String message){
         super(message);
     }
 }

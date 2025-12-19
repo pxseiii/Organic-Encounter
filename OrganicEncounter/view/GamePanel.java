@@ -6,17 +6,23 @@ import javax.swing.*;
 import model.*;
 
 @ClassInfo(
-    mainAuthor = "Mika",
+    mainAuthor = "De Guzman",
     className = "GamePanel",
     pillarsUsed = {"Encapsulation"},
     solidUsed = {"SRP"}
 )
 
+/* 
+    Description / Author Comments
+
+    Purpose: 
+    * manages main game panel UI
+    * handles visual updates including animating and drawing
+*/
+
 public class GamePanel {
-
+    // ----------- FIELDS --------------
     private JPanel mainPanel;
-
-    private JLabel health, rep, money;
 
     private JLayeredPane factorLayeredPane;
     private CardPanel cardPanel;
@@ -41,6 +47,7 @@ public class GamePanel {
 
     private boolean firstUpdate = true;
 
+    // ----------- CONSTRUCTOR --------------
     public GamePanel() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -53,6 +60,17 @@ public class GamePanel {
 
         buildUI();
     }
+
+    // ----------- GETTER --------------
+    public JPanel getPanel() {
+        return mainPanel;
+    }
+
+    public CardPanel getCardPanel() {
+        return cardPanel;
+    }
+
+    // ----------- METHODS --------------
 
     private void buildUI() {
 
@@ -246,22 +264,14 @@ public class GamePanel {
         return bar;
     }
 
-    public JPanel getPanel() {
-        return mainPanel;
-    }
-
-    public void setDay(int day){
-        dayLabel.setText("DAY " + day);
-    }
-
-    public void update(Card card, Stats stats) {
+    public void update(Card card, Stats stats, int day) {
         if (card == null) {
             situationLabel.setText("No more cards.");
             return;
         }
 
         situationLabel.setText(card.getSituation());
-
+        dayLabel.setText("DAY " + day);
         characLabel.setText(card.getTitle());
 
         cardPanel.displayCard(card);
@@ -361,10 +371,6 @@ public class GamePanel {
         }
     }
 
-    public void clearPreview() {
-        circleLayer.clearCircles();
-    }
-
     public void showEndingCard(Card endingCard) {
         if (endingCard == null) return;
 
@@ -379,7 +385,4 @@ public class GamePanel {
         cardPanel.displayCard(endingCard);
     }
 
-    public CardPanel getCardPanel() {
-        return cardPanel;
-    }
 }

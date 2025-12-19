@@ -5,24 +5,24 @@ import javax.swing.SwingUtilities;
 import view.MainWindow;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "Main",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Encapsulation"},
+    solidUsed = {"SRP"}
 )
 
 /*
-    Desc and Author Comments:
-    Purpose: solely to start the game / launch the system
-    note: invokeLater launches the GUI on the Event Dispatch Thread 
-    (the only thread that should create or update Swing UI components).
+    Description / Author Comments:
+    * Purpose: solely to start the game / launch the system
+    * note: invokeLater launches the GUI on the Event Dispatch Thread 
+    * (the only thread that should create or update Swing UI components).
  */
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainWindow ui = new MainWindow();           // builds the Jframe and UI
-            new Game(ui);                   // create Presenter and pass UI; allows it to update the UI, respond to user actions
+            new Game(ui);                               // create Presenter and pass UI; allows it to update the UI, respond to user actions; not assigned to a variable since I won't use the reference later
         });
     }
 }

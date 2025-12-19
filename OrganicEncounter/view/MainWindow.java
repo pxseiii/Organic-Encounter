@@ -5,17 +5,20 @@ import java.awt.*;
 import javax.swing.*;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "MainWindow",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Encapsulation, Inheritance"},
+    solidUsed = {"SRP, OCP"}
 )
 /* 
+    Description / Author Comments
+
     Purpose: 
-    * for switching
- */
+    * switching panels
+*/
 
 public class MainWindow  {
+    // ----------- FIELDS --------------
     private JFrame frame;
 
     private JPanel mainPanel;
@@ -26,7 +29,7 @@ public class MainWindow  {
     private GamePanel gamePanel;
     private EndPanel endPanel;
 
-    // constructor
+    // ----------- CONSTRUCTOR --------------
     public MainWindow(){                                        
         // ---------- MAIN WINDOW ----------
         frame = new JFrame("Organic Encounter");
@@ -49,10 +52,12 @@ public class MainWindow  {
         frame.setVisible(true);
     }
 
+    // ---------- METHODS ----------
     public void showTitleScreen() { cardLayout.show(mainPanel, "TITLE"); }
     public void showGameScreen() { cardLayout.show(mainPanel, "GAME"); }
     public void showEndingScreen() { cardLayout.show(mainPanel, "END"); }
 
+    // ---------- GETTERS ----------
     public TitlePanel getTitlePanel() { return titlePanel; };
     public GamePanel getGamePanel() { return gamePanel; };
     public EndPanel getEndPanel() { return endPanel; };

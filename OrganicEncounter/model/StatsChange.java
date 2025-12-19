@@ -3,13 +3,15 @@ package model;
 import annotation.ClassInfo;
 
 @ClassInfo(
-    mainAuthor = "",
+    mainAuthor = "Kaindoy",
     className = "StatsChange",
-    pillarsUsed = {},
-    solidUsed = {}
+    pillarsUsed = {"Encapsulation"},
+    solidUsed = {"SRP, OCP"}
 )
 
 /* 
+    Description / Author Comments
+
     Purpose: 
     * Represents a change to player's stats
     * Can be applied to a Stats object

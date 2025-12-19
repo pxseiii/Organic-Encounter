@@ -6,14 +6,14 @@ import annotation.ClassInfo;
     mainAuthor = "Kaindoy",
     className = "Card",
     pillarsUsed = {"Encapsulation","Inheritance", "Abstraction", "Polymorphism"},
-    solidUsed = {"SRP"}
+    solidUsed = {"SRP, OCP"}
 )
 
 /* 
     Purpose: 
     * represents an event / card with the attributes: situation, icon, and choices
     
-    Concepts used:
+    Pillars used:
     * Abstraction - represents gameplay concept as a simple Java object
     * Encapsulation
     * Polymorphism
@@ -24,14 +24,16 @@ import annotation.ClassInfo;
     * OCP: abstract Card
 */
 
-// parent class for Cards
+// ----------- ABSTRACT PARENT CLASS --------------
 public abstract class Card {
+    // ----------- FIELDS --------------
     private String situation;
     private String title;
     private String icon;
     private CardChoice leftChoice;
     private CardChoice rightChoice;
     
+    // ----------- CONSTRUCTOR --------------
     public Card(String situation, String title, String icon, CardChoice left, CardChoice right) {
         this.situation = situation;
         this.title = title;
@@ -41,18 +43,18 @@ public abstract class Card {
     }
 
     // ----------- GETTERS --------------
-
     public String getSituation() { return situation; }
     public String getTitle() { return title; }
     public String getIcon() { return icon; }
     public CardChoice getLeftChoice() { return leftChoice; }
     public CardChoice getRightChoice() { return rightChoice; }
 
+    // ----------- HELPER METHOD --------------
     public boolean updatesDay() { return true; }
 }
 
 
-// subclasses: IntroCard, RandomCard, PlotCard, EndingCard
+// ----------- CARD SUBCLASSES --------------
 class RandomCard extends Card {
     public RandomCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
         super(situation, title, icon, left, right);
