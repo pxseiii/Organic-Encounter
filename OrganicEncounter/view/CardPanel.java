@@ -94,7 +94,7 @@ public class CardPanel extends JPanel{
             iconLabel.setIcon(null);
         } else {
             try {
-                ImageIcon icon = new ImageIcon("images/" + iconPath);
+                ImageIcon icon = new ImageIcon("OrganicEncounter/images/" + iconPath);
                 
                 if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
                     throw new RuntimeException("Image failed to load");
