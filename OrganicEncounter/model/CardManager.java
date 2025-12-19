@@ -1,6 +1,14 @@
 package model;
 
+import annotation.ClassInfo;
 import java.util.List;
+
+@ClassInfo(
+    mainAuthor = "",
+    className = "MainWindow",
+    pillarsUsed = {},
+    solidUsed = {}
+)
 // import java.util.Random;
 /* 
     Purpose: 
