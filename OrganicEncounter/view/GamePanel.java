@@ -1,5 +1,6 @@
 package view;
 
+import annotation.ClassInfo;
 import java.awt.*;
 import javax.swing.*;
 import model.*;
