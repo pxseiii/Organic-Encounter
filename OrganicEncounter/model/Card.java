@@ -11,13 +11,17 @@ import annotation.ClassInfo;
 
 /* 
     Purpose: 
-    * holds card attributes: situation, icon, choices, effects
+    * represents an event / card with the attributes: situation, icon, and choices
     
     Concepts used:
     * Abstraction - represents gameplay concept as a simple Java object
     * Encapsulation
     * Polymorphism
     * Inheritance
+    
+    Principles:
+    * SRP: only card data
+    * OCP: abstract Card
 */
 
 // parent class for Cards
@@ -43,6 +47,8 @@ public abstract class Card {
     public String getIcon() { return icon; }
     public CardChoice getLeftChoice() { return leftChoice; }
     public CardChoice getRightChoice() { return rightChoice; }
+
+    public boolean updatesDay() { return true; }
 }
 
 
@@ -63,10 +69,13 @@ class IntroCard extends Card {
     public IntroCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
         super(situation, title, icon, left, right);
     }
+
+    @Override
+    public boolean updatesDay() { return false; }
 }
 
 class EndingCard extends Card {
-    public EndingCard(String situation, String title, String icon, CardChoice left, CardChoice right) {
+    public EndingCard(String situation, String icon) {
         super(situation, null, icon, null, null);
     }
 }
