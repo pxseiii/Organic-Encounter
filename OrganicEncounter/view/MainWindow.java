@@ -57,15 +57,9 @@ public class MainWindow  {
     public GamePanel getGamePanel() { return gamePanel; };
     public EndPanel getEndPanel() { return endPanel; };
 
-    public void fadeToEndScreen() {
-        PanelFader fader = new PanelFader(mainPanel);
-        fader.setFromTo("GAME", "END");
-        fader.actionPerformed(null);  // trigger fade
-    }
-
     public JPanel getMainPanel() {
-    return mainPanel;
-}
+        return mainPanel;
+    }
 
 
 }
