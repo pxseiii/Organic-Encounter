@@ -1,5 +1,14 @@
 package model;
 
+import annotation.ClassInfo;
+
+@ClassInfo(
+    mainAuthor = "",
+    className = "Stats",
+    pillarsUsed = {},
+    solidUsed = {}
+)
+
 /* 
     Purpose: 
     * gets and modifies stats of player's factors
