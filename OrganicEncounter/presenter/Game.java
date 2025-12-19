@@ -80,6 +80,11 @@ public class Game implements SwipeListener {
         // check if there's branching
         currentCard = choice.hasNextCard() ? choice.getNextCard() : cardManager.getNextCard();
 
+        // update UI
+        if (currentCard != null){
+            ui.getGamePanel().update(currentCard, playerStats); // sends next card to MainWindow
+        }
+
         // check factor-based endings first
         Card factorEnding = cardManager.getFactorEnding(playerStats);
         if (factorEnding != null){
@@ -98,11 +103,6 @@ public class Game implements SwipeListener {
                 ui.getGamePanel().showEndingCard(finalEnding);
                 return;
             }
-        }
-
-        // update UI
-        if (currentCard != null){
-            ui.getGamePanel().update(currentCard, playerStats); // sends next card to MainWindow
         }
     }
 

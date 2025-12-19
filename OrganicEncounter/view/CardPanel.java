@@ -78,7 +78,7 @@ public class CardPanel extends JPanel{
         // store
         currentCard = card;
 
-        ImageIcon icon = new ImageIcon("images/" + card.getIcon());
+        ImageIcon icon = new ImageIcon("OrganicEncounter/images/" + card.getIcon());
         Image scaled = icon.getImage().getScaledInstance(450, 400, Image.SCALE_SMOOTH);
         iconLabel.setIcon(new ImageIcon(scaled));
         

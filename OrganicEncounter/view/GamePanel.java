@@ -85,11 +85,11 @@ public class GamePanel {
         factorLayeredPane.add(repBar, Integer.valueOf(1));
         factorLayeredPane.add(moneyBar, Integer.valueOf(1));
 
-        healthIconLabel = createIcon("images/lp.png", iconSize);
+        healthIconLabel = createIcon("OrganicEncounter/images/lp.png", iconSize);
         healthIconLabel.setBounds(leftMargin, yOffset, iconSize, iconSize);
-        repIconLabel = createIcon("images/rep.png", iconSize);
+        repIconLabel = createIcon("OrganicEncounter/images/rep.png", iconSize);
         repIconLabel.setBounds(leftMargin + iconSize + spacing, yOffset, iconSize, iconSize);
-        moneyIconLabel = createIcon("images/finance.png", iconSize);
+        moneyIconLabel = createIcon("OrganicEncounter/images/finance.png", iconSize);
         moneyIconLabel.setBounds(leftMargin + 2 * iconSize + 2 * spacing, yOffset, iconSize, iconSize);
 
         factorLayeredPane.add(healthIconLabel, Integer.valueOf(2));
@@ -221,6 +221,10 @@ public class GamePanel {
         bar.setOpaque(true);
         bar.setForeground(Color.WHITE);
         bar.setBackground(new Color(0xafb5af));
+
+        // mac
+        bar.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
+
         return bar;
     }
 
