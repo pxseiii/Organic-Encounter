@@ -40,7 +40,18 @@ public class Stats {
 
     // ----------- METHODS --------------
     // used in StatsChange; to modify the value of stats 
-    public void modifyHealth(int amount) { health += amount; }
-    public void modifyRep(int amount) { rep += amount; }
-    public void modifyMoney(int amount) { money += amount; }
+    public void modifyHealth(int amount) {
+        int newValue = this.health + amount;
+        this.health = Math.max(0, Math.min(100, newValue));
+    }
+
+    public void modifyRep(int amount) {
+        int newValue = this.rep + amount;
+        this.rep = Math.max(0, Math.min(100, newValue));
+    }
+
+    public void modifyMoney(int amount) {
+        int newValue = this.money + amount;
+        this.money = Math.max(0, Math.min(100, newValue));
+    }
 }

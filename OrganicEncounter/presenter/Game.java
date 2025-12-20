@@ -123,10 +123,13 @@ public class Game implements SwipeListener {
         // determine next card: either branching card or next card from manager
         currentCard = isBranching ? choice.getNextCard() : cardManager.getNextCard();
 
-        // increments day
-        if (!isBranching && currentCard.updatesDay()){
-            day += (int) (Math.random() * 7) + 1;
-        }
+        if (currentCard != null){
+        	// increments day
+        	if (!isBranching && currentCard.updatesDay()){
+        	            day += (int) (Math.random() * 7) + 1;
+        	        }
+        	            ui.getGamePanel().update(currentCard, playerStats, day); // sends next card to MainWindow
+        	 }
 
         // update UI
         if (currentCard != null){
