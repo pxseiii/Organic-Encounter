@@ -12,10 +12,6 @@ import model.CardData;
 
 class CardDataTest {
 
-    /* ===============================
-       METHODS THAT RETURN VALUES
-       =============================== */
-
     @Test
     void testIntroDeckNotNull() {
         List<Card> intro = CardData.getIntroDeck();
@@ -44,9 +40,6 @@ class CardDataTest {
         assertFalse(ending.isEmpty(), "Ending deck should not be empty");
     }
 
-    /* ===============================
-       METHODS WITH BRANCHING LOGIC
-       =============================== */
 
     @Test
     void testCardsHaveChoicesOrEnding() {
@@ -64,10 +57,6 @@ class CardDataTest {
         }
     }
 
-    /* ===============================
-       METHODS THAT INTERACT WITH OBJECTS
-       (CardChoice → Stats)
-       =============================== */
 
     @Test
     void testCardChoiceAppliesEffect() {
@@ -83,9 +72,6 @@ class CardDataTest {
         }
     }
 
-    /* ===============================
-       METHODS THAT CHANGE GAME STATE
-       =============================== */
 
     @Test
     void testNextCardBranching() {
@@ -98,9 +84,6 @@ class CardDataTest {
         }
     }
 
-    /* ===============================
-       METHODS THAT SHOULD NOT THROW
-       =============================== */
 
     @Test
     void testDeckLoadingDoesNotThrow() {
@@ -112,10 +95,6 @@ class CardDataTest {
         }, "Loading decks should not throw exceptions");
     }
 
-    /* ===============================
-       METHODS THAT SHOW IMAGES
-       (icon path existence, not rendering)
-       =============================== */
 
     @Test
     void testCardIconPathValidity() {
@@ -129,3 +108,4 @@ class CardDataTest {
         }
     }
 }
+
