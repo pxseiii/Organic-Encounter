@@ -192,4 +192,9 @@ public class CardPanel extends JPanel{
             }
         });
     }
+
+    // For test
+    public JLabel getIconLabel() {
+        return this.iconLabel;
+    }
 }

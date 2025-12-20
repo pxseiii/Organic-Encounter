@@ -81,4 +81,9 @@ public class TitlePanel{
     public void setStartListener(ActionListener listener){
         startButton.addActionListener(listener);
     }
+
+    // For test
+    public boolean isVisible() {
+        return mainPanel.isVisible();
+    }
 }

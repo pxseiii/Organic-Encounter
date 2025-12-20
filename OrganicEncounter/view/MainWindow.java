@@ -69,4 +69,8 @@ public class MainWindow  {
     }
 
 
+    // For test
+    public boolean isVisible() {
+        return frame.isVisible();
+    }
 }

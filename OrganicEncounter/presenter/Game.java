@@ -157,6 +157,11 @@ public class Game implements SwipeListener {
         }
     }
 
+    // For test
+    public boolean isEnding() {
+        return this.isEnding;
+    }
+
 }
 
 
